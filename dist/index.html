@@ -1,0 +1,132 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="en" class="font-mono font-medium md:text-base">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YourReceipt | Home</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="js/main.js" defer></script>
+  </head>
+  <body class="bg-gray-#ffffff 100vh">
+    <header class="p-1.5">
+      <div class="flex flex-row justify-between w-full mx-auto max-w-120">
+        <div class="">
+          <div class="text-lg">Your<b>Receipt</b></div>
+          <small>Simple receipt professional results</small>
+        </div>
+        <div class="">
+          <button
+            type="button"
+            class="border-2 font-mono border-gray-300 text-gray-400 text-sm md:text-base rounded px-2.5 py-0.5 cursor-pointer hover:bg-gray-100"
+          >
+            Print
+          </button>
+          <button
+            type="button"
+            class="border-2 font-mono border-gray-300 text-gray-400 text-xs md:text-base rounded px-2.5 py-0.5 cursor-pointer hover:bg-gray-100"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div
+        class="container w-full mx-auto max-w-120 border border-[#d7dadd] rounded"
+      >
+        <form class="p-2">
+          <div class="text-xl text-gray-950 p-1 mb-3 font-mono">
+            CREATE INVOICE
+          </div>
+          <div class="text-gray-950 text-lg">Business Info</div>
+          <!-- business name -->
+          <div class="flex items-center gap-2.5">
+            <label for="business-name" class="text-gray-400"
+              >Business Name
+            </label>
+            <input
+              type="text"
+              class="border border-gray-500 focus:border-gray-400 focus:border-2 text-sm block py-1 px-1.5"
+              id="business-name"
+            />
+          </div>
+          <!-- Address -->
+          <div class="flex items-center gap-2.5">
+            <label for="address" class="text-gray-400">Address</label>
+            <input
+              type="text"
+              class="border border-gray-500 focus:border-gray-400 focus:border-2 text-sm block py-1 px-1.5"
+              id="address"
+            />
+          </div>
+          <!-- Email -->
+          <div class="flex items-center gap-2.5">
+            <label for="email" class="text-gray-400">Email</label>
+            <input
+              type="text"
+              class="border border-gray-500 focus:border-gray-400 focus:border-2 text-sm block py-1 px-1.5"
+              id="email"
+            />
+          </div>
+          <!-- Phone -->
+          <div class="flex items-center gap-2.5">
+            <label for="text" class="text-gray-400">Phone</label>
+            <input
+              type="text"
+              class="border border-gray-500 focus:border-gray-400 focus:border-2 text-sm block py-1 px-1.5"
+              id="text"
+            />
+          </div>
+          <!-- customer info -->
+          <div class="text-gray-950 text-lg mt-3">Customer Info</div>
+          <div class="flex items-center gap-2.5">
+            <label for="business-name" class="text-gray-400"
+              >Customer Name
+            </label>
+            <input
+              type="text"
+              class="border border-gray-500 focus:border-gray-400 focus:border-2 text-sm block py-1 px-1.5"
+              id="business-name"
+            />
+          </div>
+
+          <div class="flex items-center gap-2.5">
+            <label for="address" class="text-gray-400">Customer Address</label>
+            <input
+              type="text"
+              class="border border-gray-500 focus:border-gray-400 focus:border-2 text-sm block py-1 px-1.5"
+              id="address"
+            />
+          </div>
+          <!-- invoice details -->
+
+          <div class="text-gray-950 text-lg mt-3">Invoice Details</div>
+          <div class="flex items-center gap-2.5">
+            <label for="business-name" class="text-gray-400"
+              >Invoice Number
+            </label>
+            <input
+              type="text"
+              class="border border-gray-500 focus:border-gray-400 focus:border-2 text-sm block py-1 px-1.5"
+              id="business-name"
+            />
+          </div>
+
+          <div class="flex items-center gap-2.5">
+            <label for="address" class="text-gray-400">Invoice Date</label>
+            <input
+              type="text"
+              class="border border-gray-500 focus:border-gray-400 focus:border-2 text-sm block py-1 px-1.5"
+              id="address"
+            />
+          </div>
+
+
+        </form>
+      </div>
+    </main>
+    <footer>Generate invoice with yourreceipt</footer>
+  </body>
+</html>

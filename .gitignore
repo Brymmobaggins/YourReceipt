@@ -1,0 +1,5 @@
+# git should ignore this files
+
+# dependecies
+node_modules/
+package-lock.json

@@ -1,0 +1,27 @@
+/** @format */
+
+@import "tailwindcss";
+
+@theme {
+  --custom-gray: #d7dadd;
+}
+
+form input{
+    flex:1;
+    margin-bottom: 10px;
+    outline: none;
+    border-radius: 4px;
+   
+}
+
+form label{
+    width: 100px;
+}
+
+/* Background: #F9FAFB
+
+Card: #FFFFFF
+
+Text: #111827
+
+Border: #E5E7EB */
