@@ -11,23 +11,28 @@
   </head>
   <body class="bg-gray-#ffffff 100vh">
     <header class="p-1.5">
-      <div class="flex flex-row justify-between w-full mx-auto max-w-120">
+      <div
+        class="flex items-start justify-between w-full mx-auto max-w-120 mb-6"
+      >
         <div class="">
-          <div class="text-lg">Your<b>Receipt</b></div>
-          <small>Simple receipt professional results</small>
+          <h1 class="text-2xl font-semibold">Your<b>Receipt</b></h1>
+          <p class="text-sm text-gray-950">
+            Simple receipt professional results
+          </p>
         </div>
-        <div class="">
+        <div class="flex gap-2">
           <button
             type="button"
-            class="border border-gray-300 text-gray-600 text-sm md:text-base rounded px-1.5 py-0.5 cursor-pointer hover:bg-gray-100"
-          >
-            Print
-          </button>
-          <button
-            type="button"
-            class="border font-mono border-gray-300 text-gray-600 text-xs md:text-base rounded px-2.5 py-0.5 cursor-pointer hover:bg-gray-100"
+            class="text-sm px-3 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-100 transition hover:cursor-pointer"
           >
             Save
+          </button>
+
+          <button
+            type="button"
+            class="text-sm px-3 py-2 border border-blue-200 bg-blue-50 text-blue-700 rounded hover:bg-blue-100 transition hover:cursor-pointer"
+          >
+            Print
           </button>
         </div>
       </div>
@@ -42,7 +47,7 @@
           </div>
           <div class="text-gray-950 text-lg">Business Info</div>
           <!-- business name -->
-          <div class="flex items-center gap-2.5">
+          <div class="flex items-center gap-2">
             <label for="business-name" class="text-gray-400"
               >Business Name
             </label>
@@ -185,8 +190,8 @@
                   <button
                     id="remove-btn"
                     type="button"
-                    class="border text-center border-red-400 text-red-500 w-full rounded 
-                    px-1 py-0.5 text-sm hover:bg-red-200 hover:cursor-pointer"
+                    class="border text-center border-red-200 text-red-700 w-full rounded px-1 py-0.5 
+                    text-sm hover:bg-red-100 hover:cursor-pointer"
                   >
                     X
                   </button>
@@ -194,15 +199,17 @@
               </tr>
             </tbody>
           </table>
-          <button
-            type="button"
-            class=" bg-blue-600 text-white text-sm mt-1 px-1 py-0.5 rounded hover:bg-blue-500 hover:cursor-pointer"
-          >
-            Add Item
-          </button>
+          <div class="mt-2">
+            <button
+              type="button"
+              class="border border-blue-200 mt-1 px-1.5 py-1 text-sm text-blue-700 rounded hover:cursor-pointer hover:bg-blue-100 transition"
+            >
+              + Add Item
+            </button>
+          </div>
 
           <!-- charges -->
-           <div class="mt-3 text-lg text-gray-950">Charges</div>
+          <div class="mt-3 text-lg text-gray-950">Charges</div>
           <div class="charges-section flex">
             <label for="tax" class="text-gray-400">Tax %</label>
             <input
@@ -221,11 +228,17 @@
           </div>
 
           <div class="action">
-            <button type="button" class="border font-medium p-0.5">
-              Generate Invoice
-            </button>
-            <button type="button" class="border font-medium p-0.5">
+            <button
+              type="button"
+              class="border border-gray-300 text-gray-700 px-3 rounded text-sm py-2 hover:bg-gray-100 hover:cursor-pointer transition"
+            >
               Reset
+            </button>
+            <button
+              type="button"
+              class="bg-blue-600 text-white text-sm px-3 py-2 rounded hover:bg-blue-700 hover:cursor-pointer transition"
+            >
+              Generate Invoice
             </button>
           </div>
         </form>
