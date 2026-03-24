@@ -10,17 +10,15 @@
     <script src="js/main.js" defer></script>
   </head>
   <body class="bg-gray-#ffffff 100vh">
-    <header class="p-1.5">
-      <div
-        class="flex items-start justify-between w-full mx-auto max-w-120 mb-6"
-      >
-        <div class="">
+    <header class="p-2.5 border-b border-gray-300 mb-3">
+      <div class="flex items-start justify-between mb-6">
+        <div>
           <h1 class="text-2xl font-semibold">Your<b>Receipt</b></h1>
-          <p class="text-sm text-gray-950">
+          <p class="text-xs text-gray-950">
             Simple receipt professional results
           </p>
         </div>
-        <div class="flex gap-2">
+        <div class="flex gap-3">
           <button
             type="button"
             class="text-sm px-3 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-100 transition hover:cursor-pointer"
@@ -37,12 +35,10 @@
         </div>
       </div>
     </header>
-    <main>
-      <div
-        class="container w-full mx-auto max-w-120 border border-[#d7dadd] rounded"
-      >
-        <form class="p-2 overflow-x-auto">
-          <div class="text-xl text-gray-950 p-1 mb-3 font-mono">
+    <main class="flex gap-5 mx-auto max-w-200">
+      <div class="container w-full border border-gray-300 rounded flex-1">
+        <form class="p-2">
+          <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
             CREATE INVOICE
           </div>
           <div class="text-gray-950 text-lg">Business Info</div>
@@ -190,8 +186,7 @@
                   <button
                     id="remove-btn"
                     type="button"
-                    class="border text-center border-red-200 text-red-700 w-full rounded px-1 py-0.5 
-                    text-sm hover:bg-red-100 hover:cursor-pointer"
+                    class="border text-center border-red-200 text-red-700 w-full rounded px-1 py-0.5 text-sm hover:bg-red-100 hover:cursor-pointer"
                   >
                     X
                   </button>
@@ -243,8 +238,29 @@
           </div>
         </form>
       </div>
+      <!-- live Preview -->
+      <div class="flex-1 border border-gray-300 p-2 rounded">
+        <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
+          LIVE PREVIEW
+        </div>
+        <div class="">
+          asequatur. Porro eos provident illo? Qui facere expedita esse quis
+          dignissimos recusandae laborum, ducimus deleniti provident! Sequi
+          voluptates assumenda quas saepe nulla numquam quasi delectus, ad
+          nesciunt quibusdam fuga maxime, laudantium autem labore dolor fugit ex
+          magni tenetur, tempora ratione unde? Sapiente doloremque quos est
+          dolore sint quae harum necessitatibus voluptatem illo porro
+          exercitationem sit impedit repellendus culpa, cumque rerum aliquam
+          architecto itaque dolores! Nesciunt sequi ducimus ullam maiores
+          sapiente iusto deserunt reprehenderit ipsa fuga recusandae. Minima,
+          numquam natus! Et explicabo, similique autem possimus ratione
+          necessitatibus nam accusantium quos dolorum recusandae minima harum
+          corrupti voluptatibus quibusdam nobis porro nemo.
+        </div>
+      </div>
     </main>
-    <footer class="text-right">
+
+    <footer class="text-right p-2 mt-4">
       <div>Generate invoice with yourreceipt</div>
     </footer>
   </body>
