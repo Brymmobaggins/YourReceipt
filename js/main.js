@@ -14,7 +14,12 @@ function init() {
   syncBusinessEmailtoPreview(
     "business-email",
     "preview-business-email",
-    "email Address",
+    "Business Email Address",
+  );
+  synBusinessPhoneNo(
+    "business-phone",
+    "preview-phone-number",
+    "Business Phone Number",
   );
 }
 
@@ -37,8 +42,17 @@ function syncBusinessAddressToPreview(inputId, previewId, fallback) {
   });
 }
 function syncBusinessEmailtoPreview(inputId, previewId, fallback) {
-  const input = document.getElementsById(inputId);
+  const input = document.getElementById(inputId);
   const preview = document.getElementById(previewId);
+  input.addEventListener("input", () => {
+    preview.textContent = input.value || fallback;
+  });
+}
+
+function synBusinessPhoneNo(inputId, preveiewId, fallback) {
+  const input = document.getElementById(inputId);
+  const preview = document.getElementById(preveiewId);
+
   input.addEventListener("input", () => {
     preview.textContent = input.value || fallback;
   });
