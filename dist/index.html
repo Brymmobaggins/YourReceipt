@@ -83,13 +83,13 @@
           <!-- customer info -->
           <div class="text-gray-950 text-lg mt-3">Customer Info</div>
           <div class="flex items-center gap-2.5">
-            <label for="business-name" class="text-gray-400"
+            <label for="customer-name" class="text-gray-400"
               >Customer Name
             </label>
             <input
               type="text"
               class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
-              id="business-name"
+              id="customer-name"
             />
           </div>
 
@@ -98,7 +98,7 @@
             <input
               type="text"
               class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
-              id="address"
+              id="customer-address"
             />
           </div>
           <!-- invoice details -->
@@ -258,6 +258,14 @@
             Business Phone number
           </p>
         </div>
+
+        <!-- customer information preview -->
+
+         <div class="text-lg text-gray-950">Customer Info</div>
+         <p class="text-gray-600 text-sm" id="preview-customer-name"></p>
+         <p class="text-gray-600 text-sm" id="preview-customer-address"></p>
+       
+
       </div>
     </main>
 
