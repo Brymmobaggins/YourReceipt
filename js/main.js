@@ -46,3 +46,8 @@ function syncInputToPreview(inputId, previewId, fallback) {
   });
 }
 
+function syncTableItemToPreview(){
+  const itemRow =  document.querySelectorAll(".item-row")
+  
+
+}

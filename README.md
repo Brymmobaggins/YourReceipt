@@ -38,3 +38,12 @@
 | [ Generate Invoice ]              |                                              |
 | [ Reset ]                         |                                              |
 +-----------------------------------+----------------------------------------------+
+
+
+ 
+
+ ### logic for items on the table to be view
+ step 1: I read all the item-row with `.item-row`
+ step 2: for each row; get description, quantity and price.
+ step 3: calculate the amount with `amount = qty * price`
+ step 4: update the editable row amount

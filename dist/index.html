@@ -130,8 +130,9 @@
             class="border-collapse w-full border border-gray-400 table-fixed"
           >
             <thead>
-              <tr class="border-b border-gray-400">
-                <th class="text-gray-400 font-light text-center w-[38%]">
+              <tr class="border-b border-gray-400" id="items-row">
+                <th class="text-gray-400 font-light text-center w-[38%]"
+                >
                   Description
                 </th>
                 <th class="text-gray-400 font-light text-center w-[12%]">
@@ -149,13 +150,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr class="item-row">
                 <td class="border border-gray-400 p-1.5">
                   <input
                     class="border border-gray-400 w-full px-2 py-1"
                     type="text"
                     id="item-desc"
-                    placeholder=""
+                   
                   />
                 </td>
                 <td class="border border-gray-400 p-1.5">
@@ -164,7 +165,7 @@
                     type="number"
                     min="1"
                     id="item-qty"
-                    placeholder=""
+                   
                   />
                 </td>
                 <td class="border border-gray-400 p-1.5">
@@ -172,7 +173,7 @@
                     class="border border-gray-400 w-full px-2 py-1"
                     type="text"
                     id="item-price"
-                    placeholder=""
+                   
                   />
                 </td>
                 <td
@@ -267,10 +268,17 @@
         </div>
         <!-- customer invoice -->
         <div>
-          <div class="text-lg text-gray-950">Customer Invoice</div>
+          <div class="text-lg text-gray-950">Invoice Details</div>
           <p class="text-gray-600 text-sm" id="preview-invoice-number"></p>
           <p class="text-gray-600 text-sm" id="preview-invoice-date"></p>
         </div>
+        <!-- preview table -->
+        <div class="">Items</div>
+        <tbody class="" id="preview-items-body">
+          <tr>
+            <td></td>
+          </tr>
+        </tbody>
       </div>
     </main>
 
