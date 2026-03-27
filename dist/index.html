@@ -35,7 +35,7 @@
         </div>
       </div>
     </header>
-    <main class="flex gap-5 mx-auto max-w-200">
+    <main class="flex gap-5 mx-auto max-w-220">
       <div class="container w-full border border-gray-300 rounded flex-1">
         <form class="p-2">
           <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
@@ -127,24 +127,23 @@
           <!-- items -->
           <div class="mt-3 text-lg">Items</div>
           <table
-            class="border-collapse w-full border border-gray-400 table-fixed"
+            class="border-collapse w-full border border-gray-300 table-fixed"
           >
             <thead>
-              <tr class="border-b border-gray-400" id="items-row">
-                <th class="text-gray-400 font-light text-center w-[38%]"
-                >
+              <tr class="border-b border-gray-300 bg-gray-900 text-sm">
+                <th class="text-gray-300 font-light text-center w-[30%]">
                   Description
                 </th>
-                <th class="text-gray-400 font-light text-center w-[12%]">
+                <th class="text-gray-300 font-light text-center w-[12%]">
                   Qty
                 </th>
-                <th class="text-gray-400 font-light text-center w-[18%]">
+                <th class="text-gray-300 font-light text-center w-[18%]">
                   Unit Price
                 </th>
-                <th class="text-gray-400 font-light text-center w-[18%]">
+                <th class="text-gray-300 font-light text-center w-[18%]">
                   Amount
                 </th>
-                <th class="text-gray-400 font-light text-center w-[14%]">
+                <th class="text-gray-300 font-light text-center w-[16%]">
                   Remove
                 </th>
               </tr>
@@ -153,41 +152,31 @@
               <tr class="item-row">
                 <td class="border border-gray-400 p-1.5">
                   <input
-                    class="border border-gray-400 w-full px-2 py-1"
+                    class="item-desc border border-gray-400 w-full px-2 py-1 break-word"
                     type="text"
-                    id="item-desc"
-                   
                   />
                 </td>
                 <td class="border border-gray-400 p-1.5">
                   <input
-                    class="border border-gray-400 w-full px-2 py-1"
+                    class="item-qty border border-gray-400 w-full px-2 py-1"
                     type="number"
                     min="1"
-                    id="item-qty"
-                   
                   />
                 </td>
                 <td class="border border-gray-400 p-1.5">
                   <input
-                    class="border border-gray-400 w-full px-2 py-1"
+                    class="item-price not-even:border border-gray-400 w-full px-2 py-1"
                     type="text"
-                    id="item-price"
-                   
                   />
                 </td>
-                <td
-                  class="text-center whitespace-nowrap font-bold"
-                  id="item-amount"
-                >
+                <td class="item-amount text-center whitespace-nowrap font-bold">
                   0.00
                 </td>
 
                 <td class="border border-gray-400 p-1.5 text-center">
                   <button
-                    id="remove-btn"
                     type="button"
-                    class="border text-center border-red-200 text-red-700 w-full rounded px-1 py-0.5 text-sm hover:bg-red-100 hover:cursor-pointer"
+                    class="remove-btn border text-center border-red-200 text-red-700 w-full rounded px-1 py-0.5 text-sm hover:bg-red-100 hover:cursor-pointer"
                   >
                     X
                   </button>
@@ -273,12 +262,21 @@
           <p class="text-gray-600 text-sm" id="preview-invoice-date"></p>
         </div>
         <!-- preview table -->
-        <div class="">Items</div>
-        <tbody class="" id="preview-items-body">
-          <tr>
-            <td></td>
-          </tr>
-        </tbody>
+        <table class="w-full border border-gray-300 rounded">
+          <thead class="font-light text-sm">
+            <tr>
+              <th>Description</th>
+              <th>Qty</th>
+              <th>Unit Price</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+
+          <!-- 🔥 THIS is where it goes -->
+          <tbody id="preview-items-body">
+            <!-- JS will insert rows here -->
+          </tbody>
+        </table>
       </div>
     </main>
 

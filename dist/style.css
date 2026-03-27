@@ -21,6 +21,7 @@
     --color-gray-500: oklch(55.1% 0.027 264.364);
     --color-gray-600: oklch(44.6% 0.03 256.802);
     --color-gray-700: oklch(37.3% 0.034 259.733);
+    --color-gray-900: oklch(21% 0.034 264.665);
     --color-gray-950: oklch(13% 0.028 261.692);
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -246,20 +247,23 @@
   .w-\[12\%\] {
     width: 12%;
   }
-  .w-\[14\%\] {
-    width: 14%;
+  .w-\[16\%\] {
+    width: 16%;
   }
   .w-\[18\%\] {
     width: 18%;
   }
-  .w-\[38\%\] {
-    width: 38%;
+  .w-\[30\%\] {
+    width: 30%;
+  }
+  .w-\[32\%\] {
+    width: 32%;
   }
   .w-full {
     width: 100%;
   }
-  .max-w-200 {
-    max-width: calc(var(--spacing) * 200);
+  .max-w-220 {
+    max-width: calc(var(--spacing) * 220);
   }
   .flex-1 {
     flex: 1;
@@ -320,6 +324,9 @@
   .bg-blue-600 {
     background-color: var(--color-blue-600);
   }
+  .bg-gray-900 {
+    background-color: var(--color-gray-900);
+  }
   .p-1 {
     padding: calc(var(--spacing) * 1);
   }
@@ -331,6 +338,9 @@
   }
   .p-2\.5 {
     padding: calc(var(--spacing) * 2.5);
+  }
+  .p-4\.5 {
+    padding: calc(var(--spacing) * 4.5);
   }
   .px-1 {
     padding-inline: calc(var(--spacing) * 1);
@@ -398,11 +408,17 @@
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
   }
+  .wrap-break-word {
+    overflow-wrap: break-word;
+  }
   .whitespace-nowrap {
     white-space: nowrap;
   }
   .text-blue-700 {
     color: var(--color-blue-700);
+  }
+  .text-gray-300 {
+    color: var(--color-gray-300);
   }
   .text-gray-400 {
     color: var(--color-gray-400);
@@ -426,6 +442,12 @@
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .not-even\:border {
+    &:not(*:nth-child(even)) {
+      border-style: var(--tw-border-style);
+      border-width: 1px;
+    }
   }
   .hover\:cursor-pointer {
     &:hover {
@@ -488,6 +510,10 @@ form input {
 }
 form label {
   width: 100px;
+}
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 @property --tw-border-style {
   syntax: "*";

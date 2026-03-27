@@ -29,11 +29,7 @@ function init() {
     "preview-invoice-number",
     "Invoice number",
   );
-  syncInputToPreview(
-    "invoice-date",
-    "preview-invoice-date",
-    "Invoice Date",
-  );
+  syncInputToPreview("invoice-date", "preview-invoice-date", "Invoice Date");
 }
 init();
 
@@ -46,8 +42,41 @@ function syncInputToPreview(inputId, previewId, fallback) {
   });
 }
 
-function syncTableItemToPreview(){
-  const itemRow =  document.querySelectorAll(".item-row")
-  
+function syncTableItemToPreview() {
+  const itemRow = document.querySelectorAll(".item-row");
+  const previewItemsBody = document.getElementById("preview-items-body");
 
+  let previewRowsHTML = "";
+
+  itemRow.forEach((row) => {
+    const desc = row.querySelector(".item-desc").value || "item";
+    const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
+
+    const price = parseFloat(row.querySelector(".item-price").value) || 0;
+    const amount = price * qty;
+
+    row.querySelector(".item-amount").textContent = amount.toFixed(2);
+
+    previewRowsHTML += `
+     <tr class="p-4.5">
+       <td>${desc}</td>
+       <td>${qty}</td>
+       <td>${price.toFixed(2)}</td>
+       <td>${amount}</td>
+     </tr>
+    
+    
+    `;
+  });
+  previewItemsBody.innerHTML = previewRowsHTML;
 }
+
+document.addEventListener("input", function (e) {
+  if (
+    e.target.classList.contains("item-desc") ||
+    e.target.classList.contains("item-qty") ||
+    e.target.classList.contains("item-price")
+  ) {
+    syncTableItemToPreview();
+  }
+});
