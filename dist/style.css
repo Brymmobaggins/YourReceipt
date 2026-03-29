@@ -256,9 +256,6 @@
   .w-\[30\%\] {
     width: 30%;
   }
-  .w-\[32\%\] {
-    width: 32%;
-  }
   .w-full {
     width: 100%;
   }
@@ -320,6 +317,9 @@
   }
   .bg-blue-50 {
     background-color: var(--color-blue-50);
+  }
+  .bg-blue-100 {
+    background-color: var(--color-blue-100);
   }
   .bg-blue-600 {
     background-color: var(--color-blue-600);
@@ -407,9 +407,6 @@
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
-  }
-  .wrap-break-word {
-    overflow-wrap: break-word;
   }
   .whitespace-nowrap {
     white-space: nowrap;

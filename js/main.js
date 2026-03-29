@@ -48,6 +48,14 @@ function syncTableItemToPreview() {
 
   let previewRowsHTML = "";
 
+  // if(previewRowsHTML === ""){
+  //   previewItemsBody.innerHTML =`
+  //    <tr>
+  //      <td colspan="4">No item added</td>
+  //    </tr>
+  //   `
+  // }
+
   itemRow.forEach((row) => {
     const desc = row.querySelector(".item-desc").value || "item";
     const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
@@ -58,7 +66,7 @@ function syncTableItemToPreview() {
     row.querySelector(".item-amount").textContent = amount.toFixed(2);
 
     previewRowsHTML += `
-     <tr class="p-4.5">
+     <tr class="text-center">
        <td>${desc}</td>
        <td>${qty}</td>
        <td>${price.toFixed(2)}</td>
