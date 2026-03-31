@@ -1,5 +1,6 @@
 /** @format */
 
+const addItemBtn = document.getElementById("add-item-btn");
 function init() {
   syncInputToPreview("business-name", "preview-business-name", "Business Name");
   syncInputToPreview(
@@ -30,6 +31,7 @@ function init() {
     "Invoice number",
   );
   syncInputToPreview("invoice-date", "preview-invoice-date", "Invoice Date");
+  // syncItemsToPreview();
 }
 init();
 
@@ -42,42 +44,69 @@ function syncInputToPreview(inputId, previewId, fallback) {
   });
 }
 
-function syncTableItemToPreview() {
-  const itemRow = document.querySelectorAll(".item-row");
+function syncItemsToPreview() {
+  const itemRows = document.querySelectorAll(".item-row");
   const previewItemsBody = document.getElementById("preview-items-body");
-
   let previewRowsHTML = "";
 
-  // if(previewRowsHTML === ""){
-  //   previewItemsBody.innerHTML =`
-  //    <tr>
-  //      <td colspan="4">No item added</td>
-  //    </tr>
-  //   `
-  // }
-
-  itemRow.forEach((row) => {
-    const desc = row.querySelector(".item-desc").value || "item";
+  itemRows.forEach((row) => {
+    const desc = row.querySelector(".item-desc").value.trim();
     const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
-
     const price = parseFloat(row.querySelector(".item-price").value) || 0;
     const amount = price * qty;
 
     row.querySelector(".item-amount").textContent = amount.toFixed(2);
 
-    previewRowsHTML += `
-     <tr class="text-center">
-       <td>${desc}</td>
-       <td>${qty}</td>
-       <td>${price.toFixed(2)}</td>
-       <td>${amount}</td>
-     </tr>
-    
-    
-    `;
-  });
-  previewItemsBody.innerHTML = previewRowsHTML;
+    if ((!desc && qty === 0 && price === 0)) {
+      return;
+    } else {
+      previewRowsHTML += `
+        <tr class="text-center">
+              <td>${desc}</td>
+              <td>${qty}</td>
+              <td>${price.toFixed(2)}</td>
+              <td>${amount.toFixed(2)}</td>
+        </tr>
+        `;
+      }
+    });
+  
+
+  if (previewRowsHTML === "") {
+    previewItemsBody.innerHTML = `
+      <tr class="col-span-4 align-center">
+        <td class="text-gray-900 text-center" colspan="4">No Items</td>
+      </tr>`;
+  } else {
+    previewItemsBody.innerHTML = previewRowsHTML;
+  }
 }
+
+// addItemBtn.addEventListener("click", function () {
+//   const itemRows = document.querySelectorAll(".item-row");
+//   const previewItemsBody = document.getElementById("preview-items-body");
+
+//   let previewRowsHTML = "";
+
+//   itemRows.forEach((row) => {
+//     const desc = row.querySelector(".item-desc").value || "item";
+//     const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
+
+//     const price = parseFloat(row.querySelector(".item-price").value) || 0;
+//     const amount = price * qty;
+
+//     row.querySelector(".item-amount").textContent = amount.toFixed(2);
+//     previewRowsHTML += `
+//      <tr class="text-center">
+//        <td>${desc}</td>
+//        <td>${qty}</td>
+//        <td>${price.toFixed(2)}</td>
+//        <td>${amount}</td>
+//      </tr>
+//      `;
+//   });
+//   previewItemsBody.innerHTML = previewRowsHTML;
+// });
 
 document.addEventListener("input", function (e) {
   if (
@@ -85,6 +114,6 @@ document.addEventListener("input", function (e) {
     e.target.classList.contains("item-qty") ||
     e.target.classList.contains("item-price")
   ) {
-    syncTableItemToPreview();
+    syncItemsToPreview();
   }
 });
