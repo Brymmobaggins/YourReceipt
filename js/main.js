@@ -43,7 +43,9 @@ function syncInputToPreview(inputId, previewId, fallback) {
     preview.textContent = input.value || fallback;
   });
 }
-
+// function cleaRow(){
+//   const ro
+// }
 function syncItemsToPreview() {
   const itemRows = document.querySelectorAll(".item-row");
   const previewItemsBody = document.getElementById("preview-items-body");
@@ -57,7 +59,7 @@ function syncItemsToPreview() {
 
     row.querySelector(".item-amount").textContent = amount.toFixed(2);
 
-    if ((!desc && qty === 0 && price === 0)) {
+    if (!desc && qty === 0 && price === 0) {
       return;
     } else {
       previewRowsHTML += `
@@ -68,9 +70,8 @@ function syncItemsToPreview() {
               <td>${amount.toFixed(2)}</td>
         </tr>
         `;
-      }
-    });
-  
+    }
+  });
 
   if (previewRowsHTML === "") {
     previewItemsBody.innerHTML = `
@@ -82,31 +83,24 @@ function syncItemsToPreview() {
   }
 }
 
-// addItemBtn.addEventListener("click", function () {
-//   const itemRows = document.querySelectorAll(".item-row");
-//   const previewItemsBody = document.getElementById("preview-items-body");
 
-//   let previewRowsHTML = "";
+function addNewRow() {
+  const rowBody = document.querySelector("#row-body");
+  const newRow = document.createElement("tr");
+  // newRow.classList.add("item-row");
+  newRow.innerHTML = `
+    <td><input type="text" class="item-desc" placeholder="Description"></td>
+    <td><input type="number" class="item-qty" min="0" step="1" placeholder="Qty"></td>
+    <td><input type="number" class="item-price" min="0" step="0.01" placeholder="Price"></td>
+    <td class="item-amount">0.00</td>
+  `;
+  rowBody.appendChild(newRow);
 
-//   itemRows.forEach((row) => {
-//     const desc = row.querySelector(".item-desc").value || "item";
-//     const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
+  syncItemsToPreview()
+}
+    
 
-//     const price = parseFloat(row.querySelector(".item-price").value) || 0;
-//     const amount = price * qty;
-
-//     row.querySelector(".item-amount").textContent = amount.toFixed(2);
-//     previewRowsHTML += `
-//      <tr class="text-center">
-//        <td>${desc}</td>
-//        <td>${qty}</td>
-//        <td>${price.toFixed(2)}</td>
-//        <td>${amount}</td>
-//      </tr>
-//      `;
-//   });
-//   previewItemsBody.innerHTML = previewRowsHTML;
-// });
+addItemBtn.addEventListener("click", addNewRow);
 
 document.addEventListener("input", function (e) {
   if (
