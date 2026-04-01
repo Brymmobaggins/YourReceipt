@@ -83,22 +83,48 @@ function syncItemsToPreview() {
   }
 }
 
-
+// Adds a new item row to the invoice input table and updates the preview accordingly.
 function addNewRow() {
   const rowBody = document.querySelector("#row-body");
   const newRow = document.createElement("tr");
-  // newRow.classList.add("item-row");
+  newRow.classList.add("item-row");
   newRow.innerHTML = `
-    <td><input type="text" class="item-desc" placeholder="Description"></td>
-    <td><input type="number" class="item-qty" min="0" step="1" placeholder="Qty"></td>
-    <td><input type="number" class="item-price" min="0" step="0.01" placeholder="Price"></td>
-    <td class="item-amount">0.00</td>
+    <td class="border border-gray-400 p-1.5">
+                  <input
+                    class="item-desc border border-gray-400 w-full px-2 py-1 break-word"
+                    type="text"
+                  />
+                </td>
+                <td class="border border-gray-400 p-1.5">
+                  <input
+                    class="item-qty border border-gray-400 w-full px-2 py-1"
+                    type="number"
+                    min="1"
+                  />
+                </td>
+                <td class="border border-gray-400 p-1.5">
+                  <input
+                    class="item-price border border-gray-400 w-full px-2 py-1"
+                    type="text"
+                  />
+                </td>
+                <td class="item-amount text-center whitespace-nowrap font-bold">
+                  0.00
+                </td>
+
+                <td class="border border-gray-400 p-1.5 text-center">
+                  <button
+                    type="button"
+                    class="remove-btn border text-center border-red-200 text-red-700 w-full rounded px-1 py-0.5 text-sm hover:bg-red-100 hover:cursor-pointer" onclick=""
+                  >
+                    X
+                  </button>
+                </td>
   `;
   rowBody.appendChild(newRow);
 
-  syncItemsToPreview()
+  syncItemsToPreview();
 }
-    
 
 addItemBtn.addEventListener("click", addNewRow);
 

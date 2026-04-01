@@ -47,3 +47,8 @@
  step 2: for each row; get description, quantity and price.
  step 3: calculate the amount with `amount = qty * price`
  step 4: update the editable row amount
+
+
+
+
+// added logic, when the button is clicked new role is created
