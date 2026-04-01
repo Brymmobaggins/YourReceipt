@@ -1,5 +1,5 @@
 /** @format */
-
+const rowBody = document.querySelector("#row-body");
 const addItemBtn = document.getElementById("add-item-btn");
 function init() {
   syncInputToPreview("business-name", "preview-business-name", "Business Name");
@@ -43,9 +43,7 @@ function syncInputToPreview(inputId, previewId, fallback) {
     preview.textContent = input.value || fallback;
   });
 }
-// function cleaRow(){
-//   const ro
-// }
+
 function syncItemsToPreview() {
   const itemRows = document.querySelectorAll(".item-row");
   const previewItemsBody = document.getElementById("preview-items-body");
@@ -82,14 +80,26 @@ function syncItemsToPreview() {
     previewItemsBody.innerHTML = previewRowsHTML;
   }
 }
+rowBody.addEventListener("click", function (e) {
+  if (e.target.classList.contains("remove-btn")) {
+    handleDeleteRow(e.target);
+  }
+});
+
+function handleDeleteRow(btn) {
+  const row = btn.closest(".item-row");
+  if (row) {
+    row.remove();
+    syncItemsToPreview();
+  }
+}
 
 // Adds a new item row to the invoice input table and updates the preview accordingly.
 function addNewRow() {
-  const rowBody = document.querySelector("#row-body");
   const newRow = document.createElement("tr");
   newRow.classList.add("item-row");
-  newRow.innerHTML = `
-    <td class="border border-gray-400 p-1.5">
+  newRow.innerHTML += `
+                <td class="border border-gray-400 p-1.5">
                   <input
                     class="item-desc border border-gray-400 w-full px-2 py-1 break-word"
                     type="text"
@@ -115,14 +125,14 @@ function addNewRow() {
                 <td class="border border-gray-400 p-1.5 text-center">
                   <button
                     type="button"
-                    class="remove-btn border text-center border-red-200 text-red-700 w-full rounded px-1 py-0.5 text-sm hover:bg-red-100 hover:cursor-pointer" onclick=""
+                    class="remove-btn border text-center border-red-200 text-red-700 w-full rounded px-1 py-0.5 text-sm hover:bg-red-100 hover:cursor-pointer"
                   >
                     X
                   </button>
                 </td>
+                
   `;
   rowBody.appendChild(newRow);
-
   syncItemsToPreview();
 }
 
