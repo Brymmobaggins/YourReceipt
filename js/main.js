@@ -55,9 +55,11 @@ function syncItemsToPreview() {
   const previewItemsBody = document.getElementById("preview-items-body");
   const previewSubtotal = document.getElementById("preview-subtotal");
   const previewTax = document.getElementById("preview-tax");
+  const previewTotal = document.getElementById("preview-total");
 
   let previewRowsHTML = "";
   let subTotal = 0;
+  // let total = 0;
 
   const itemRows = document.querySelectorAll(".item-row");
   itemRows.forEach((row) => {
@@ -92,11 +94,13 @@ function syncItemsToPreview() {
   }
   const taxInput = document.getElementById("tax");
 
-  const taxRate = parseFloat(taxInput.value);
-  const taxAmout = subTotal * (taxRate / 100);
+  const taxRate = parseFloat(taxInput.value) || 0;
+  const taxAmount = subTotal * (taxRate / 100);
+  const total = subTotal + taxAmount;
 
   previewSubtotal.textContent = `Subtotal: ${formatMoney(subTotal)}`;
-  previewTax.textContent = `Tax (${taxRate}): ${formatMoney(taxAmout)}`;
+  previewTax.textContent = `Tax (${taxRate}%): ${formatMoney(taxAmount)}`;
+  previewTotal.textContent = `Total: ${formatMoney(total)}`;
 }
 
 rowBody.addEventListener("click", function (e) {
@@ -114,7 +118,8 @@ function handleDeleteRow(btn) {
 }
 
 // Adds a new item row to the invoice input table and updates the preview accordingly.
-function addNewRow() {
+
+addItemBtn.addEventListener("click", function () {
   const newRow = document.createElement("tr");
   newRow.classList.add("item-row");
   newRow.innerHTML += `
@@ -149,13 +154,11 @@ function addNewRow() {
                     X
                   </button>
                 </td>
-                
-  `;
+
+                `;
   rowBody.appendChild(newRow);
   syncItemsToPreview();
-}
-
-addItemBtn.addEventListener("click", addNewRow);
+});
 
 document.addEventListener("input", function (e) {
   if (
