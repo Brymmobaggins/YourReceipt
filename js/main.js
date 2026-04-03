@@ -32,6 +32,8 @@ function init() {
     "Invoice number",
   );
   syncInputToPreview("invoice-date", "preview-invoice-date", "Invoice Date");
+
+  syncInputToPreview("tax", "preview-tax", "");
   syncItemsToPreview();
 }
 init();
@@ -50,19 +52,20 @@ function formatMoney(value) {
 }
 
 function syncItemsToPreview() {
-  const itemRows = document.querySelectorAll(".item-row");
   const previewItemsBody = document.getElementById("preview-items-body");
   const previewSubtotal = document.getElementById("preview-subtotal");
-  
+  const previewTax = document.getElementById("preview-tax");
+
   let previewRowsHTML = "";
   let subTotal = 0;
 
+  const itemRows = document.querySelectorAll(".item-row");
   itemRows.forEach((row) => {
     const desc = row.querySelector(".item-desc").value.trim();
     const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
     const price = parseFloat(row.querySelector(".item-price").value) || 0;
     const amount = price * qty;
-    
+
     row.querySelector(".item-amount").textContent = formatMoney(amount);
     subTotal += amount;
 
@@ -87,8 +90,13 @@ function syncItemsToPreview() {
   } else {
     previewItemsBody.innerHTML = previewRowsHTML;
   }
+  const taxInput = document.getElementById("tax");
+
+  const taxRate = parseFloat(taxInput.value);
+  const taxAmout = subTotal * (taxRate / 100);
 
   previewSubtotal.textContent = `Subtotal: ${formatMoney(subTotal)}`;
+  previewTax.textContent = `Tax (${taxRate}): ${formatMoney(taxAmout)}`;
 }
 
 rowBody.addEventListener("click", function (e) {
@@ -153,7 +161,8 @@ document.addEventListener("input", function (e) {
   if (
     e.target.classList.contains("item-desc") ||
     e.target.classList.contains("item-qty") ||
-    e.target.classList.contains("item-price")
+    e.target.classList.contains("item-price") ||
+    e.target.id === "tax"
   ) {
     syncItemsToPreview();
   }
