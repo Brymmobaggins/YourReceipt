@@ -52,3 +52,15 @@
 
 
 // added logic, when the button is clicked new role is created
+
+
+// logic for delete rows
+rowBody listens for all clicks inside the tbody
+when you click the X button, e.target is that button
+classList.contains("remove-btn") confirms it is a remove button
+closest(".item-row") finds the exact row
+row.remove() deletes that row
+syncItemsToPreview() updates the preview immediately 
+
+
+// add height to preview table

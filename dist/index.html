@@ -41,7 +41,8 @@
           <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
             CREATE INVOICE
           </div>
-          <div class="text-gray-950 text-lg">Business Info</div>
+          <div class="text-gray-950 text-lg hr">Business Info</div>
+          <hr class="border-gray-200 border" />
           <!-- business name -->
           <div class="flex items-center gap-2">
             <label for="business-name" class="text-gray-400"
@@ -82,6 +83,7 @@
           </div>
           <!-- customer info -->
           <div class="text-gray-950 text-lg mt-3">Customer Info</div>
+          <hr class="border-gray-200 border" />
           <div class="flex items-center gap-2.5">
             <label for="customer-name" class="text-gray-400"
               >Customer Name
@@ -104,6 +106,7 @@
           <!-- invoice details -->
 
           <div class="text-gray-950 text-lg mt-3">Invoice Details</div>
+          <hr class="border-gray-200 border" />
           <div class="flex items-center gap-2.5">
             <label for="business-name" class="text-gray-400"
               >Invoice Number
@@ -263,7 +266,9 @@
           <p class="text-gray-600 text-sm" id="preview-invoice-date"></p>
         </div>
         <!-- preview table -->
-        <table class="w-full border border-gray-300 rounded p-1.5">
+        <table
+          class="w-full border border-gray-300 rounded p-1.5 h-full max-h-48"
+        >
           <thead class="font-light text-sm align-center rounded">
             <tr class="text-sm align-center bg-gray-900 rounded">
               <th class="font-light text-gray-300">Description</th>
@@ -273,8 +278,19 @@
             </tr>
           </thead>
 
-          <tbody id="preview-items-body"></tbody>
+          <tbody id="preview-items-body">
+            <tr></tr>
+          </tbody>
         </table>
+        <!-- subtotal -->
+        <div class="border border-gray-300 text-right">
+          <div class="text-gray-500" id="preview-subtotal"></div>
+          <div class="text-gray-500" id="preview-tax">Tax:</div>
+          <div class="text-gray-500" id="preview-discount">Discount:</div>
+          <div class="text-gray-500" id="preview-total" class="Total">
+            Total:
+          </div>
+        </div>
       </div>
     </main>
 

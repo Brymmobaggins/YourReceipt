@@ -1,6 +1,7 @@
 /** @format */
 const rowBody = document.querySelector("#row-body");
 const addItemBtn = document.getElementById("add-item-btn");
+
 function init() {
   syncInputToPreview("business-name", "preview-business-name", "Business Name");
   syncInputToPreview(
@@ -31,7 +32,7 @@ function init() {
     "Invoice number",
   );
   syncInputToPreview("invoice-date", "preview-invoice-date", "Invoice Date");
-  // syncItemsToPreview();
+  syncItemsToPreview();
 }
 init();
 
@@ -44,34 +45,41 @@ function syncInputToPreview(inputId, previewId, fallback) {
   });
 }
 
+function formatMoney(value) {
+  return value.toFixed(2);
+}
+
 function syncItemsToPreview() {
   const itemRows = document.querySelectorAll(".item-row");
   const previewItemsBody = document.getElementById("preview-items-body");
+  const previewSubtotal = document.getElementById("preview-subtotal");
+  
   let previewRowsHTML = "";
+  let subTotal = 0;
 
   itemRows.forEach((row) => {
     const desc = row.querySelector(".item-desc").value.trim();
     const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
     const price = parseFloat(row.querySelector(".item-price").value) || 0;
     const amount = price * qty;
-
-    row.querySelector(".item-amount").textContent = amount.toFixed(2);
+    
+    row.querySelector(".item-amount").textContent = formatMoney(amount);
+    subTotal += amount;
 
     if (!desc && qty === 0 && price === 0) {
       return;
-    } else {
-      previewRowsHTML += `
-        <tr class="text-center">
-              <td>${desc}</td>
-              <td>${qty}</td>
-              <td>${price.toFixed(2)}</td>
-              <td>${amount.toFixed(2)}</td>
-        </tr>
-        `;
     }
+    previewRowsHTML += `
+      <tr class="text-center">
+            <td>${desc}</td>
+            <td>${qty}</td>
+            <td>${formatMoney(price)}</td>
+            <td>${formatMoney(amount)}</td>
+      </tr>
+    `;
   });
 
-  if (previewRowsHTML === "") {
+  if (previewRowsHTML.trim() === "") {
     previewItemsBody.innerHTML = `
       <tr class="col-span-4 align-center">
         <td class="text-gray-900 text-center" colspan="4">No Items</td>
@@ -79,7 +87,10 @@ function syncItemsToPreview() {
   } else {
     previewItemsBody.innerHTML = previewRowsHTML;
   }
+
+  previewSubtotal.textContent = `Subtotal: ${formatMoney(subTotal)}`;
 }
+
 rowBody.addEventListener("click", function (e) {
   if (e.target.classList.contains("remove-btn")) {
     handleDeleteRow(e.target);
