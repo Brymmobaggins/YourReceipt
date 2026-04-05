@@ -49,6 +49,9 @@ function init() {
     "Customer Address",
   );
   syncInputToPreview("invoice-number", "preview-invoice-number", "Invoice Number")
+  syncInputToPreview("invoice-date", "preview-invoice-date", "Invoice Date")
+
+
 
   syncItemsToPreview();
 }
