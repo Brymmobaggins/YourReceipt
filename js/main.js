@@ -1,6 +1,7 @@
 /** @format */
 const rowBody = document.querySelector("#row-body");
 const addItemBtn = document.getElementById("add-item-btn");
+const prinBtn = document.getElementById("print-btn")
 
 function init() {
   syncInputToPreview("business-name", "preview-business-name", "Business Name");
@@ -170,3 +171,7 @@ document.addEventListener("input", function (e) {
     syncItemsToPreview();
   }
 });
+
+prinBtn.addEventListener("click", function(){
+  window.print()
+})
