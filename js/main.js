@@ -3,6 +3,7 @@ const rowBody = document.querySelector("#row-body");
 const addItemBtn = document.getElementById("add-item-btn");
 const resetBtn = document.getElementById("reset");
 
+const prinBtn = document.getElementById("print-btn")
 
 function init() {
   syncInputToPreview("business-name", "preview-business-name", "Business Name");
@@ -203,3 +204,7 @@ function handleDeleteRow(btn) {
     syncItemsToPreview();
   }
 }
+
+prinBtn.addEventListener("click", function(){
+  window.print()
+})
