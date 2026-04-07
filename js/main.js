@@ -83,7 +83,8 @@ function createItemRow() {
   newRow.innerHTML = `
                 <td class="border border-gray-400 p-1.5">
                   <input
-                    class="item-desc border border-gray-400 w-full px-2 py-1 break-word"
+                    class="item-desc border border-gray-400 w-full 
+                    px-2 py-1 break-word"
                     type="text"
                   />
                 </td>
@@ -150,11 +151,11 @@ function syncItemsToPreview() {
     subTotal += amount;
 
     previewRowsHTML += `
-      <tr class="text-center">
-            <td>${desc}</td>
-            <td>${qty}</td>
-            <td>${formatMoney(price)}</td>
-            <td>${formatMoney(amount)}</td>
+      <tr class="p-1.5">
+            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${desc}</td>
+            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${qty}</td>
+            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${formatMoney(price)}</td>
+            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${formatMoney(amount)}</td>
       </tr>
     `;
   });
@@ -162,7 +163,7 @@ function syncItemsToPreview() {
   if (previewRowsHTML.trim() === "") {
     previewItemsBody.innerHTML = `
       <tr>
-        <td class="text-gray-900 text-center" colspan="4">No Items</td>
+        <td class="text-center text-gray-600 p-1.5" colspan="4">No Items</td>
       </tr>`;
   } else {
     previewItemsBody.innerHTML = previewRowsHTML;
@@ -200,7 +201,7 @@ rowBody.addEventListener("click", function (e) {
   }
 });
 
-//  function to delete row when x is clicked
+//  function to delete row when x butoon is clicked
 function handleDeleteRow(btn) {
   const row = btn.closest(".item-row");
   if (row) {

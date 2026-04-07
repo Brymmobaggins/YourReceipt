@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="style.css" />
     <script src="/js/main.js" defer></script>
   </head>
-  <body class="bg-gray-#ffffff 100vh">
-    <header class="p-2.5 border-b border-gray-300 mb-3">
+  <body class="bg-gray-#ffffff min-h-screen">
+    <header class="p-2.5 border-b border-gray-300 mb-3" id="header">
       <div class="flex items-start justify-between mb-6">
         <div>
           <h1 class="text-2xl font-semibold">Your<b>Receipt</b></h1>
           <p class="text-xs text-gray-950">
-            Simple receipt professional results
+            Simple receipts. Professional results.
           </p>
         </div>
         <div class="flex gap-3">
@@ -28,6 +28,7 @@
 
           <button
             type="button"
+            id="print-btn"
             class="text-sm px-3 py-2 border border-blue-200 bg-blue-50 text-blue-700 rounded hover:bg-blue-100 transition hover:cursor-pointer"
           >
             Print
@@ -36,8 +37,8 @@
       </div>
     </header>
     <main class="flex gap-5 mx-auto max-w-220">
-      <div class="container w-full border border-gray-300 rounded flex-1">
-        <form class="p-2">
+      <div class="w-full border border-gray-300 rounded flex-1" id="form-container">
+        <form class="p-2" id="form">
           <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
             CREATE INVOICE
           </div>
@@ -200,7 +201,7 @@
           <!-- charges -->
           <div class="mt-3 text-lg text-gray-950">Charges</div>
           <hr class="border-gray-200 border" />
-          <div class="charges-section flex">
+          <div class="charges-section flex mt-2">
             <label for="tax" class="text-gray-400">Tax</label>
             <input
               type="number"
@@ -235,22 +236,28 @@
         </form>
       </div>
       <!-- live Preview -->
-      <div class="flex-1 border border-gray-300 p-2 rounded">
+      <div class="flex-1 border border-gray-300 p-2 rounded" id="invoice-preview">
         <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
-          LIVE PREVIEW
+          INVOICE PREVIEW
         </div>
-        <div class="mt-3">
-          <h2 class="text-gray-600 text-sm" id="preview-business-name">
+        <div class="mt-2">
+          <p class="text-gray-600 text-sm h-8 p-1.5" id="preview-business-name">
             Business Name
-          </h2>
+          </p>
 
-          <p class="text-gray-600 text-sm" id="preview-business-address">
+          <p
+            class="text-gray-600 text-sm h-8 p-1.5"
+            id="preview-business-address"
+          >
             Business Address
           </p>
-          <p class="text-gray-600 text-sm" id="preview-business-email">
+          <p
+            class="text-gray-600 text-sm h-8 p-1.5"
+            id="preview-business-email"
+          >
             Business Email
           </p>
-          <p class="text-gray-600 text-sm" id="preview-phone-number">
+          <p class="text-gray-600 text-sm h-8 p-1.5" id="preview-phone-number">
             Business Phone number
           </p>
         </div>
@@ -258,43 +265,55 @@
         <!-- customer information preview -->
         <div>
           <div class="text-lg text-gray-950">Customer Info</div>
-          <p class="text-gray-600 text-sm" id="preview-customer-name"></p>
-          <p class="text-gray-600 text-sm" id="preview-customer-address"></p>
+          <p class="text-gray-600 text-sm h-8 p-1.5" id="preview-customer-name">
+            Customer name
+          </p>
+          <p
+            class="text-gray-600 text-sm h-8 p-1.5"
+            id="preview-customer-address"
+          >
+            Customer address
+          </p>
         </div>
         <!-- customer invoice -->
         <div>
           <div class="text-lg text-gray-950">Invoice Details</div>
-          <p class="text-gray-600 text-sm" id="preview-invoice-number"></p>
-          <p class="text-gray-600 text-sm" id="preview-invoice-date"></p>
+          <p
+            class="text-gray-600 text-sm h-8 p-1.5"
+            id="preview-invoice-number"
+          >
+            Invoice number
+          </p>
+          <p class="text-gray-600 text-sm h-8 p-1.5" id="preview-invoice-date">
+            Invoice date
+          </p>
         </div>
         <!-- preview table -->
-        <table
-          class="w-full border border-gray-300 rounded p-1.5 h-full max-h-48"
-        >
-          <thead class="font-light text-sm align-center rounded">
-            <tr class="text-sm align-center bg-gray-900 rounded">
-              <th class="font-light text-gray-300">Description</th>
-              <th class="font-light text-gray-300">Qty</th>
-              <th class="font-light text-gray-300">Unit Price</th>
-              <th class="font-light text-gray-300">Amount</th>
+        <table class="w-full border border-gray-300 rounded">
+          <thead class="rounded">
+            <tr class="text-sm font-medium text-left bg-gray-900 rounded">
+              <th class="font-light text-gray-200 text-center">Description</th>
+              <th class="font-light text-center text-gray-200">Qty</th>
+              <th class="font-light text-center text-gray-200">Unit Price</th>
+              <th class="font-light text-center text-gray-200">Amount</th>
             </tr>
           </thead>
 
           <tbody id="preview-items-body">
-            <tr></tr>
+           
           </tbody>
         </table>
         <!-- subtotal -->
         <div class="border border-gray-300 text-right">
-          <div class="text-gray-500" id="preview-subtotal"></div>
-          <div class="text-gray-500" id="preview-tax">Tax:</div>
-          <div class="text-gray-500" id="preview-discount">Discount:</div>
-          <div class="text-gray-500" id="preview-total">Total:</div>
+          <div class="text-gray-800" id="preview-subtotal"></div>
+          <div class="text-gray-800" id="preview-tax"></div>
+          <div class="text-gray-800" id="preview-discount"></div>
+          <div class="text-gray-800" id="preview-total"></div>
         </div>
       </div>
     </main>
 
-    <footer class="text-right p-2 mt-4">
+    <footer class="text-right p-2 mt-4" id="footer">
       <div>Generate invoice with yourreceipt</div>
     </footer>
   </body>

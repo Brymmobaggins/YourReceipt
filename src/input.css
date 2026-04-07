@@ -1,6 +1,12 @@
 /** @format */
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "tailwindcss";
+
+@theme {
+  --font-Roboto: "Roboto", sans-serif;
+}
 
 form input {
   flex: 1;
@@ -17,6 +23,48 @@ input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+@media print {
+  #header,
+  #form-container,
+  #footer {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  main {
+    display: block !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  #invoice-preview {
+    display: block !important;
+    width: 100% !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+  #invoice-preview table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  #invoice-preview th,
+  #invoice-preview td {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+}
+
 /* Background: #F9FAFB
 
 Card: #FFFFFF

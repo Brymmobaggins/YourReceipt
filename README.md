@@ -8,11 +8,6 @@ designed to help users create professional invoices quickly and efficiently.
 The application allow user dynamically add, edit and remove
 invoice items while providing a real-time preview of the invoice. it automatically invoice amount, subtotal,tax,discount and finat total, ensuring accuracy without manual computation.
 
-
-
-
-
-
 +----------------------------------------------------------------------------------+
 | yourreceipt [ Save ] [ Print ] |
 | Simple receipts. Professional results. |
@@ -44,7 +39,7 @@ invoice items while providing a real-time preview of the invoice. it automatical
 | | [______________] [__] [__] | | Total: 1770 |
 | +-----------------------------+ | |
 | [ + Add Item ] | Notes: |
-| | ********\*\*********\_\_\_\_********\*\********* |
+| | **\*\*\*\***\*\***\*\*\*\***\_\_\_\_**\*\*\*\***\*\***\*\*\*\*** |
 | Charges | |
 | [Tax %__________] | |
 | [Discount_______] | |
@@ -72,3 +67,9 @@ row.remove() deletes that row
 syncItemsToPreview() updates the preview immediately
 
 // add height to preview table
+
+<!-- print logic -->
+
+for the print() function to work, i wrapped preview invoice in it own container. why did i do that? i need a clear section to target the print, and also keep the print logic simple. i really love where my print `button` is place. it is global action for the invoice page, the header placement makes more sense. i use `window.print()`, why? it is beginner friendly, keeps my current layout intact and easier to debug. so, when the `prinBtn` button is clicked i want user to the preview section only
+
+
