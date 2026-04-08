@@ -136,6 +136,7 @@ function syncItemsToPreview() {
   let previewRowsHTML = "";
   let subTotal = 0;
 
+  
   const itemRows = document.querySelectorAll(".item-row");
   itemRows.forEach((row) => {
     const desc = row.querySelector(".item-desc").value.trim();
@@ -213,3 +214,55 @@ function handleDeleteRow(btn) {
 prinBtn.addEventListener("click", function(){
   window.print()
 })
+
+
+// const getInvoiceData = () => {
+//   const key = "invoiceData";
+//   try {
+//     const storedData = localStorage.getItem(key);
+    
+//     // Return parsed data or a fallback empty object if key is missing
+//     return storedData ? JSON.parse(storedData) : {};
+//   } catch (error) {
+//     // Handles corrupted JSON or restricted storage access
+//     console.error("Error retrieving invoice data:", error);
+//     return {};
+//   }
+// };
+
+
+function getInvoiceDate(){
+
+  
+  const businessName = document.getElementById("business-name").value
+  const businessAddress = document.getElementById("business-address").value
+  const businessEmail = document.getElementById("business-email").value
+  const businessPhone = document.getElementById("business-phone").value
+
+  const customerName = document.getElementById("customer-name").value
+  const customerAddress = document.getElementById("customer-address").value
+
+  const invoiceNumber = document.getElementById("invoice-number").value
+  const invoiceDate = document.getElementById("invoice-date").value
+
+  const tax  = document.getElementById("tax").value
+  const discount = document.getElementById("discount").value
+
+
+  const items = []
+  const itemsRows = document.querySelectorAll("item-row")
+  itemsRows.forEach((row)=>{
+    
+  })
+
+
+
+
+
+  const invoiceData = JSON.parse(localStorage.getItem("invoice")) || {}
+
+ 
+  
+
+}
+getInvoiceDate()
