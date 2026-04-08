@@ -489,6 +489,16 @@
       line-height: var(--tw-leading, var(--text-base--line-height));
     }
   }
+  .print\:hidden {
+    @media print {
+      display: none;
+    }
+  }
+  .print\:bg-white {
+    @media print {
+      background-color: var(--color-white);
+    }
+  }
 }
 form input {
   flex: 1;
@@ -504,14 +514,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
   margin: 0;
 }
 @media print {
-  #header, #form-container, #footer {
-    display: none !important;
-  }
-  body {
-    background: white !important;
-    margin: 0;
-    padding: 0;
-  }
   main {
     display: block !important;
     max-width: 100% !important;

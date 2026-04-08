@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="style.css" />
     <script src="/js/main.js" defer></script>
   </head>
-  <body class="bg-gray-#ffffff min-h-screen">
-    <header class="p-2.5 border-b border-gray-300 mb-3" id="header">
+  <body class="bg-gray-#ffffff min-h-screen print:bg-white">
+    <header class="p-2.5 border-b border-gray-300 mb-3 print:hidden">
       <div class="flex items-start justify-between mb-6">
         <div>
           <h1 class="text-2xl font-semibold">Your<b>Receipt</b></h1>
@@ -37,7 +37,7 @@
       </div>
     </header>
     <main class="flex gap-5 mx-auto max-w-220">
-      <div class="w-full border border-gray-300 rounded flex-1" id="form-container">
+      <div class="w-full border border-gray-300 rounded flex-1 print:hidden">
         <form class="p-2" id="form">
           <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
             CREATE INVOICE
@@ -304,7 +304,7 @@
           </tbody>
         </table>
         <!-- subtotal -->
-        <div class="border border-gray-300 text-right">
+        <div class="border border-gray-300 p-1.5 text-right">
           <div class="text-gray-800" id="preview-subtotal"></div>
           <div class="text-gray-800" id="preview-tax"></div>
           <div class="text-gray-800" id="preview-discount"></div>
@@ -313,7 +313,7 @@
       </div>
     </main>
 
-    <footer class="text-right p-2 mt-4" id="footer">
+    <footer class="text-right p-2 mt-4 print:hidden">
       <div>Generate invoice with yourreceipt</div>
     </footer>
   </body>
