@@ -3,7 +3,7 @@ const rowBody = document.querySelector("#row-body");
 const addItemBtn = document.getElementById("add-item-btn");
 const resetBtn = document.getElementById("reset");
 
-const prinBtn = document.getElementById("print-btn")
+const prinBtn = document.getElementById("print-btn");
 
 function init() {
   syncInputToPreview("business-name", "preview-business-name", "Business Name");
@@ -48,10 +48,12 @@ function init() {
     "preview-customer-address",
     "Customer Address",
   );
-  syncInputToPreview("invoice-number", "preview-invoice-number", "Invoice Number")
-  syncInputToPreview("invoice-date", "preview-invoice-date", "Invoice Date")
-
-
+  syncInputToPreview(
+    "invoice-number",
+    "preview-invoice-number",
+    "Invoice Number",
+  );
+  syncInputToPreview("invoice-date", "preview-invoice-date", "Invoice Date");
 
   syncItemsToPreview();
 }
@@ -136,7 +138,6 @@ function syncItemsToPreview() {
   let previewRowsHTML = "";
   let subTotal = 0;
 
-  
   const itemRows = document.querySelectorAll(".item-row");
   itemRows.forEach((row) => {
     const desc = row.querySelector(".item-desc").value.trim();
@@ -211,58 +212,60 @@ function handleDeleteRow(btn) {
   }
 }
 
-prinBtn.addEventListener("click", function(){
-  window.print()
-})
+prinBtn.addEventListener("click", function () {
+  window.print();
+});
 
+function getInvoiceData() {
+  const businessName = document.getElementById("business-name").value;
+  const businessAddress = document.getElementById("business-address").value;
+  const businessEmail = document.getElementById("business-email").value;
+  const businessPhone = document.getElementById("business-phone").value;
 
-// const getInvoiceData = () => {
-//   const key = "invoiceData";
-//   try {
-//     const storedData = localStorage.getItem(key);
-    
-//     // Return parsed data or a fallback empty object if key is missing
-//     return storedData ? JSON.parse(storedData) : {};
-//   } catch (error) {
-//     // Handles corrupted JSON or restricted storage access
-//     console.error("Error retrieving invoice data:", error);
-//     return {};
-//   }
-// };
+  const customerName = document.getElementById("customer-name").value;
+  const customerAddress = document.getElementById("customer-address").value;
 
+  const invoiceNumber = document.getElementById("invoice-number").value;
+  const invoiceDate = document.getElementById("invoice-date").value;
 
-function getInvoiceDate(){
+  const tax = parseFloat(document.getElementById("tax").value) || 0;
+  const discount = parseFloat(document.getElementById("discount").value) || 0;
 
-  
-  const businessName = document.getElementById("business-name").value
-  const businessAddress = document.getElementById("business-address").value
-  const businessEmail = document.getElementById("business-email").value
-  const businessPhone = document.getElementById("business-phone").value
+  const items = [];
+  const itemsRows = document.querySelectorAll(".item-row");
 
-  const customerName = document.getElementById("customer-name").value
-  const customerAddress = document.getElementById("customer-address").value
+  itemsRows.forEach((row) => {
+    const desc = row.querySelector(".item-desc").value.trim();
+    const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
+    const price = parseFloat(row.querySelector(".item-price").value) || 0;
 
-  const invoiceNumber = document.getElementById("invoice-number").value
-  const invoiceDate = document.getElementById("invoice-date").value
+    if (!desc && qty === 0 && price === 0) {
+      return;
+    }
+    items.push({ desc, qty, price });
+  });
 
-  const tax  = document.getElementById("tax").value
-  const discount = document.getElementById("discount").value
-
-
-  const items = []
-  const itemsRows = document.querySelectorAll("item-row")
-  itemsRows.forEach((row)=>{
-    
-  })
-
-
-
-
-
-  const invoiceData = JSON.parse(localStorage.getItem("invoice")) || {}
-
- 
-  
-
+  const invoiceData = {
+    business: {
+      name: businessName,
+      address: businessAddress,
+      email: businessEmail,
+      phone: businessPhone,
+    },
+    customer: {
+      name: customerName,
+      address: customerAddress,
+    },
+    invoice: {
+      number: invoiceNumber,
+      date: invoiceDate,
+    },
+    charges: {
+      tax,
+      discount,
+    },
+    items,
+  };
+  return invoiceData
 }
-getInvoiceDate()
+console.log(getInvoiceData());
