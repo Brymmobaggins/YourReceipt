@@ -118,12 +118,13 @@ function createItemRow() {
   `;
   return newRow;
 }
-// Adds a new item row to the invoice input table and updates the preview accordingly.
+// Adds a new item row to the invoice input table and updates the preview accordingly and save to the local storage
 
 function addNewRow() {
   const newRow = createItemRow();
   rowBody.appendChild(newRow);
   syncItemsToPreview();
+  saveInvoiceData()
 }
 
 addItemBtn.addEventListener("click", addNewRow);
@@ -183,6 +184,8 @@ function syncItemsToPreview() {
   previewTax.textContent = `Tax (${taxRate}%): ${formatMoney(taxAmount)}`;
   previewDiscount.textContent = `Discount (${discountRate}%): ${formatMoney(discountAmount)}`;
   previewTotal.textContent = `Total: ${formatMoney(total)}`;
+
+  saveInvoiceData()
 }
 
 document.addEventListener("input", function (e) {
@@ -194,6 +197,7 @@ document.addEventListener("input", function (e) {
     e.target.id === "discount"
   ) {
     syncItemsToPreview();
+    saveInvoiceData()
   }
 });
 
@@ -209,6 +213,7 @@ function handleDeleteRow(btn) {
   if (row) {
     row.remove();
     syncItemsToPreview();
+    saveInvoiceData()
   }
 }
 
@@ -268,4 +273,15 @@ function getInvoiceData() {
   };
   return invoiceData
 }
-console.log(getInvoiceData());
+
+// this function job is to call the `getInvoiceData()` converts the result to JSON, and store it in local storage. why did i convert plain object to string? because local storage can not plain object directly, it only stores strings.
+
+function saveInvoiceData(){
+  const invoiceData = getInvoiceData()
+  localStorage.setItem("invoiceData", JSON.stringify(invoiceData))
+
+}
+
+// function renderSavedData(){
+//   const savedInvoiceData = localStorage.getItem("invoiceData", JSON.parse(invoiceData))
+// }
