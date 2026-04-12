@@ -88,6 +88,7 @@ function createItemRow() {
                     class="item-desc border border-gray-400 w-full 
                     px-2 py-1 break-word"
                     type="text"
+                    data-invoice-field
                   />
                 </td>
                 <td class="border border-gray-400 p-1.5">
@@ -95,12 +96,14 @@ function createItemRow() {
                     class="item-qty border border-gray-400 w-full px-2 py-1"
                     type="number"
                     min="1"
+                    data-invoice-field
                   />
                 </td>
                 <td class="border border-gray-400 p-1.5">
                   <input
                     class="item-price border border-gray-400 w-full px-2 py-1"
                     type="text"
+                    data-invoice-field
                   />
                 </td>
                 <td class="item-amount text-center whitespace-nowrap font-bold">
@@ -124,7 +127,7 @@ function addNewRow() {
   const newRow = createItemRow();
   rowBody.appendChild(newRow);
   syncItemsToPreview();
-  saveInvoiceData()
+  saveInvoiceData();
 }
 
 addItemBtn.addEventListener("click", addNewRow);
@@ -185,19 +188,13 @@ function syncItemsToPreview() {
   previewDiscount.textContent = `Discount (${discountRate}%): ${formatMoney(discountAmount)}`;
   previewTotal.textContent = `Total: ${formatMoney(total)}`;
 
-  saveInvoiceData()
+  saveInvoiceData();
 }
 
 document.addEventListener("input", function (e) {
-  if (
-    e.target.classList.contains("item-desc") ||
-    e.target.classList.contains("item-qty") ||
-    e.target.classList.contains("item-price") ||
-    e.target.id === "tax" ||
-    e.target.id === "discount"
-  ) {
+  if (e.target.hasAttribute("data-invoice-field")) {
     syncItemsToPreview();
-    saveInvoiceData()
+    saveInvoiceData();
   }
 });
 
@@ -213,7 +210,7 @@ function handleDeleteRow(btn) {
   if (row) {
     row.remove();
     syncItemsToPreview();
-    saveInvoiceData()
+    saveInvoiceData();
   }
 }
 
@@ -271,15 +268,14 @@ function getInvoiceData() {
     },
     items,
   };
-  return invoiceData
+  return invoiceData;
 }
 
 // this function job is to call the `getInvoiceData()` converts the result to JSON, and store it in local storage. why did i convert plain object to string? because local storage can not plain object directly, it only stores strings.
 
-function saveInvoiceData(){
-  const invoiceData = getInvoiceData()
-  localStorage.setItem("invoiceData", JSON.stringify(invoiceData))
-
+function saveInvoiceData() {
+  const invoiceData = getInvoiceData();
+  localStorage.setItem("invoiceData", JSON.stringify(invoiceData));
 }
 
 // function renderSavedData(){

@@ -53,6 +53,7 @@
               type="text"
               class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
               id="business-name"
+              data-invoice-field
             />
           </div>
           <!-- Address -->
@@ -62,6 +63,7 @@
               type="text"
               class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
               id="business-address"
+              data-invoice-field
             />
           </div>
           <!-- Email -->
@@ -71,6 +73,7 @@
               type="text"
               class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
               id="business-email"
+              data-invoice-field
             />
           </div>
           <!-- Phone -->
@@ -80,6 +83,7 @@
               type="number"
               class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
               id="business-phone"
+              data-invoice-field
             />
           </div>
           <!-- customer info -->
@@ -93,6 +97,7 @@
               type="text"
               class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
               id="customer-name"
+              data-invoice-field
             />
           </div>
 
@@ -102,6 +107,7 @@
               type="text"
               class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
               id="customer-address"
+              data-invoice-field
             />
           </div>
           <!-- invoice details -->
@@ -116,6 +122,7 @@
               type="number"
               class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
               id="invoice-number"
+              data-invoice-field
             />
           </div>
 
@@ -125,6 +132,7 @@
               type="date"
               class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
               id="invoice-date"
+              data-invoice-field
             />
           </div>
 
@@ -158,6 +166,7 @@
                   <input
                     class="item-desc border border-gray-400 w-full px-2 py-1 break-word"
                     type="text"
+                    data-invoice-field
                   />
                 </td>
                 <td class="border border-gray-400 p-1.5">
@@ -165,12 +174,14 @@
                     class="item-qty border border-gray-400 w-full px-2 py-1"
                     type="number"
                     min="1"
+                    data-invoice-field
                   />
                 </td>
                 <td class="border border-gray-400 p-1.5">
                   <input
                     class="item-price border border-gray-400 w-full px-2 py-1"
                     type="text"
+                    data-invoice-field
                   />
                 </td>
                 <td class="item-amount text-center whitespace-nowrap font-bold">
@@ -207,6 +218,7 @@
               type="number"
               id="tax"
               class="border border-gray-400 focus:border-2 rounded px-2 py-1 w-full text-sm"
+              data-invoice-field
             />
           </div>
           <div class="flex">
@@ -215,6 +227,7 @@
               type="number"
               id="discount"
               class="border border-gray-400 focus:border-2 rounded px-2 py-1 w-full text-sm"
+              data-invoice-field
             />
           </div>
 
@@ -236,7 +249,10 @@
         </form>
       </div>
       <!-- live Preview -->
-      <div class="flex-1 border border-gray-300 p-2 rounded" id="invoice-preview">
+      <div
+        class="flex-1 border border-gray-300 p-2 rounded"
+        id="invoice-preview"
+      >
         <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
           INVOICE PREVIEW
         </div>
@@ -299,9 +315,7 @@
             </tr>
           </thead>
 
-          <tbody id="preview-items-body">
-           
-          </tbody>
+          <tbody id="preview-items-body"></tbody>
         </table>
         <!-- subtotal -->
         <div class="border border-gray-300 p-1.5 text-right">
