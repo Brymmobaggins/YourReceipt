@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css" />
     <script src="/js/main.js" defer></script>
   </head>
-  <body class="bg-gray-#ffffff min-h-screen print:bg-white">
+  <body class="bg-gray-white min-h-screen print:bg-white">
     <header class="p-2.5 border-b border-gray-300 mb-3 print:hidden">
       <div class="flex items-start justify-between mb-6">
         <div>
@@ -20,8 +20,9 @@
         </div>
         <div class="flex gap-3">
           <button
-            type="button"
-            class="text-sm px-3 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-100 transition hover:cursor-pointer"
+            type="button" id="save-btn"
+            class="text-sm px-3 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-100
+             transition hover:cursor-pointer"
           >
             Save
           </button>
@@ -38,7 +39,7 @@
     </header>
     <main class="flex gap-5 mx-auto max-w-220">
       <div class="w-full border border-gray-300 rounded flex-1 print:hidden">
-        <form class="p-2" id="form">
+        <form class="p-2 shadow-md" id="form">
           <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
             CREATE INVOICE
           </div>
@@ -250,7 +251,7 @@
       </div>
       <!-- live Preview -->
       <div
-        class="flex-1 border border-gray-300 p-2 rounded"
+        class="flex-1 border border-gray-300 p-2 rounded shadow-md"
         id="invoice-preview"
       >
         <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
