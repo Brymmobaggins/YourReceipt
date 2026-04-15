@@ -1,7 +1,7 @@
 /** @format */
 const rowBody = document.querySelector("#row-body");
 const addItemBtn = document.getElementById("add-item-btn");
-const resetBtn = document.getElementById("reset");
+const resetBtn = document.getElementById("reset-btn");
 const prinBtn = document.getElementById("print-btn");
 const saveBtn = document.getElementById("save-btn");
 
@@ -54,8 +54,6 @@ function init() {
     "Invoice Number",
   );
   syncInputToPreview("invoice-date", "preview-invoice-date", "Invoice Date");
-
-  syncItemsToPreview();
 }
 
 init();
@@ -71,12 +69,6 @@ function syncInputToPreview(inputId, previewId, fallback) {
 
 function formatMoney(value) {
   return value.toFixed(2);
-}
-
-function resetTextPreviews() {
-  previewFieldConfigs.forEach(({ previewId, fallback }) => {
-    document.getElementById(previewId).textContent = fallback;
-  });
 }
 
 function createItemRow() {
@@ -272,7 +264,6 @@ function getInvoiceData() {
 
 function loadInvoiceData() {
   const savedData = localStorage.getItem("invoiceData");
-
   if (!savedData) {
     return;
   }
@@ -323,15 +314,42 @@ function loadInvoiceData() {
   }
   syncItemsToPreview();
 }
+loadInvoiceData();
+
 // this function job is to call the `getInvoiceData()` converts the result to JSON, and store it in local storage. why did i convert plain object to string? because local storage can not plain object directly, it only stores strings.
-saveBtn.addEventListener("click", saveInvoiceData);
 function saveInvoiceData() {
   const invoiceData = getInvoiceData();
   localStorage.setItem("invoiceData", JSON.stringify(invoiceData));
 }
-
-loadInvoiceData();
+saveBtn.addEventListener("click", saveInvoiceData);
 
 document.querySelectorAll("[data-invoice-field]").forEach((input) => {
   input.dispatchEvent(new Event("input"));
 });
+
+// fuction to reset
+function resetInvoice() {
+  // clear all inputs
+  document.querySelectorAll("input").forEach((input) => {
+    input.value = "";
+    
+  });
+  
+  // clear items row
+  rowBody.innerHTML = "";
+  
+  // add fresh row
+  addNewRow()
+
+  // removed saved data
+  localStorage.removeItem("invoiceData");
+
+  // reset preveiew text
+  document.querySelectorAll("[data-invoice-field]").forEach((input) => {
+    input.dispatchEvent(new Event("input"));
+  })
+
+  // reset total and preview table
+  syncItemsToPreview()
+}
+resetBtn.addEventListener("click", resetInvoice);
