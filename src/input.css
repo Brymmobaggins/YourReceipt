@@ -2,10 +2,13 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
+@import url('https://fonts.googleapis.com/css2?family=Fruktur:ital@0;1&display=swap');
+
 @import "tailwindcss";
 
 @theme {
   --font-Roboto: "Roboto", sans-serif;
+  --font-fruktur: "Fruktur", system-ui;
 }
 
 form input {
@@ -30,8 +33,6 @@ input[type="number"]::-webkit-inner-spin-button {
   #footer {
     display: none !important;
   } */
-
- 
 
   main {
     display: block !important;

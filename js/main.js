@@ -338,7 +338,6 @@ function resetInvoice() {
   // clear items row
   rowBody.innerHTML = "";
   
-  // add fresh row
   addNewRow()
 
   // removed saved data
