@@ -16,19 +16,23 @@
     <script src="/js/main.js" defer></script>
   </head>
   <body class="bg-gray-white min-h-screen print:bg-white">
-    <header class="p-2.5 border-b border-gray-300 bg-white mb-3 sticky top-0 print:hidden">
+    <header
+      class="p-2.5 border-b border-gray-300 bg-white mb-3 sticky top-0 print:hidden"
+    >
       <div class="flex items-start justify-between mb-6">
         <div>
-          <h1 class="text-2xl font-semibold text-black font-fruktur">Your<b>Receipt</b></h1>
+          <h1 class="text-2xl font-semibold text-blue-600 font-fruktur">
+            Your<b>Receipt</b>
+          </h1>
           <p class="text-xs text-gray-950">
             Simple receipts. Professional results.
           </p>
         </div>
         <div class="flex gap-3">
           <button
-            type="button" id="save-btn"
-            class="text-sm px-3 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-100
-             transition hover:cursor-pointer"
+            type="button"
+            id="save-btn"
+            class="text-sm px-3 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-100 transition hover:cursor-pointer"
           >
             Save
           </button>
@@ -121,20 +125,20 @@
 
           <div class="text-gray-950 text-lg mt-3">Invoice Details</div>
           <hr class="border-gray-200 border" />
-          <div class="flex items-center gap-2.5">
-            <label for="business-name" class="text-gray-400"
+         <div class="flex items-center gap-2.5">
+            <label for="invoice-number" class="text-gray-400"
               >Invoice Number
             </label>
             <input
-              type="number"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              type="text"
+              class="text-sm block py-1 px-2 w-full"
               id="invoice-number"
               data-invoice-field
             />
           </div>
 
           <div class="flex items-center gap-2.5">
-            <label for="address" class="text-gray-400">Invoice Date</label>
+            <label for="invoice-date" class="text-gray-400">Invoice Date</label>
             <input
               type="date"
               class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
@@ -240,7 +244,8 @@
 
           <div class="action">
             <button
-              type="button" id="reset-btn"
+              type="button"
+              id="reset-btn"
               class="border border-gray-300 text-gray-700 px-3 rounded text-sm py-2 hover:bg-gray-100 hover:cursor-pointer transition"
               id="reset"
             >

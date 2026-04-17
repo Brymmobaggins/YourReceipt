@@ -264,13 +264,25 @@ function getInvoiceData() {
 
 function loadInvoiceData() {
   const savedData = localStorage.getItem("invoiceData");
+  const previewInvoiceNumber = document.getElementById(
+    "preview-invoice-number"
+  );
+  const invoiceNumberInput = document.getElementById("invoice-number");
+
   if (!savedData) {
+    const newInvoiceNumber = generateInvoiceNumber();
+    invoiceNumberInput.value = newInvoiceNumber;
+    previewInvoiceNumber.textContent = newInvoiceNumber;
+
     return;
   }
 
   const invoiceData = JSON.parse(savedData);
 
-  // Restore business info
+  const restoredInvoiceNumber = invoiceData.invoice.number || generateInvoiceNumber()
+  invoiceNumberInput.value = restoredInvoiceNumber
+  previewInvoiceNumber.textContent = restoredInvoiceNumber
+
   document.getElementById("business-name").value =
     invoiceData.business.name || "";
   document.getElementById("business-address").value =
@@ -280,24 +292,20 @@ function loadInvoiceData() {
   document.getElementById("business-phone").value =
     invoiceData.business.phone || "";
 
-  // Restore customer info
   document.getElementById("customer-name").value =
     invoiceData.customer.name || "";
   document.getElementById("customer-address").value =
     invoiceData.customer.address || "";
 
-  // Restore invoice info
-  document.getElementById("invoice-number").value =
-    invoiceData.invoice.number || "";
+  
+
   document.getElementById("invoice-date").value =
     invoiceData.invoice.date || "";
 
-  // Restore charges
   document.getElementById("tax").value = invoiceData.charges.tax || "";
   document.getElementById("discount").value =
     invoiceData.charges.discount || "";
 
-  // Clear existing item rows
   rowBody.innerHTML = "";
 
   //  restore items
@@ -313,42 +321,58 @@ function loadInvoiceData() {
     addNewRow();
   }
   syncItemsToPreview();
+
+  document.querySelectorAll("[data-invoice-field]").forEach((input) => {
+    input.dispatchEvent(new Event("input"));
+  });
 }
 loadInvoiceData();
 
-// this function job is to call the `getInvoiceData()` converts the result to JSON, and store it in local storage. why did i convert plain object to string? because local storage can not plain object directly, it only stores strings.
+// this function job is to call the `getInvoiceData()` converts the result to JSON, and store it in local storage. why did i convert plain object to string? because local storage can not store plain object directly, it only stores strings.
 function saveInvoiceData() {
   const invoiceData = getInvoiceData();
   localStorage.setItem("invoiceData", JSON.stringify(invoiceData));
 }
 saveBtn.addEventListener("click", saveInvoiceData);
 
+// find all inputs with `data-invoice-field` attribute and trigger their `input` events.
 document.querySelectorAll("[data-invoice-field]").forEach((input) => {
   input.dispatchEvent(new Event("input"));
 });
 
 // fuction to reset
 function resetInvoice() {
-  // clear all inputs
   document.querySelectorAll("input").forEach((input) => {
     input.value = "";
-    
   });
-  
+
   // clear items row
   rowBody.innerHTML = "";
-  
-  addNewRow()
 
-  // removed saved data
+  addNewRow();
   localStorage.removeItem("invoiceData");
 
   // reset preveiew text
   document.querySelectorAll("[data-invoice-field]").forEach((input) => {
     input.dispatchEvent(new Event("input"));
-  })
+  });
 
   // reset total and preview table
-  syncItemsToPreview()
+  syncItemsToPreview();
 }
 resetBtn.addEventListener("click", resetInvoice);
+
+function generateInvoiceNumber() {
+  let counter = localStorage.getItem("invoiceCounter");
+
+  if (!counter) {
+    counter = 1;
+  } else {
+    counter = parseInt(counter) + 1;
+  }
+  localStorage.setItem("invoiceCounter", counter);
+
+  return `INVOICE NO-${String(counter).padStart(4, "0")}`;
+}
+
+console.log(generateInvoiceNumber());
