@@ -68,7 +68,11 @@ function syncInputToPreview(inputId, previewId, fallback) {
 }
 
 function formatMoney(value) {
-  return value.toFixed(2);
+  return new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+    minimumFractionDigits: 2,
+  }).format(value);
 }
 
 function createItemRow() {
@@ -265,7 +269,7 @@ function getInvoiceData() {
 function loadInvoiceData() {
   const savedData = localStorage.getItem("invoiceData");
   const previewInvoiceNumber = document.getElementById(
-    "preview-invoice-number"
+    "preview-invoice-number",
   );
   const invoiceNumberInput = document.getElementById("invoice-number");
 
@@ -279,9 +283,10 @@ function loadInvoiceData() {
 
   const invoiceData = JSON.parse(savedData);
 
-  const restoredInvoiceNumber = invoiceData.invoice.number || generateInvoiceNumber()
-  invoiceNumberInput.value = restoredInvoiceNumber
-  previewInvoiceNumber.textContent = restoredInvoiceNumber
+  const restoredInvoiceNumber =
+    invoiceData.invoice.number || generateInvoiceNumber();
+  invoiceNumberInput.value = restoredInvoiceNumber;
+  previewInvoiceNumber.textContent = restoredInvoiceNumber;
 
   document.getElementById("business-name").value =
     invoiceData.business.name || "";
@@ -296,8 +301,6 @@ function loadInvoiceData() {
     invoiceData.customer.name || "";
   document.getElementById("customer-address").value =
     invoiceData.customer.address || "";
-
-  
 
   document.getElementById("invoice-date").value =
     invoiceData.invoice.date || "";
