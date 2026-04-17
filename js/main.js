@@ -278,6 +278,9 @@ function loadInvoiceData() {
     invoiceNumberInput.value = newInvoiceNumber;
     previewInvoiceNumber.textContent = newInvoiceNumber;
 
+    const invoiceDate = document.getElementById("invoice-date")
+    invoiceDate.value = getTodayDate()
+
     return;
   }
 
@@ -303,7 +306,7 @@ function loadInvoiceData() {
     invoiceData.customer.address || "";
 
   document.getElementById("invoice-date").value =
-    invoiceData.invoice.date || "";
+    invoiceData.invoice.date || getTodayDate();
 
   document.getElementById("tax").value = invoiceData.charges.tax || "";
   document.getElementById("discount").value =
@@ -351,6 +354,7 @@ function resetInvoice() {
 
   // clear items row
   rowBody.innerHTML = "";
+  document.getElementById("invoice-date").value = getTodayDate()
 
   addNewRow();
   localStorage.removeItem("invoiceData");
@@ -379,3 +383,11 @@ function generateInvoiceNumber() {
 }
 
 console.log(generateInvoiceNumber());
+
+
+function getTodayDate(){
+  const today = new Date()
+
+  return today.toISOString().split("T")[0]
+
+}
