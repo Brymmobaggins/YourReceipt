@@ -125,14 +125,15 @@
 
           <div class="text-gray-950 text-lg mt-3">Invoice Details</div>
           <hr class="border-gray-200 border" />
-         <div class="flex items-center gap-2.5">
+          <div class="flex items-center gap-2.5">
             <label for="invoice-number" class="text-gray-400"
               >Invoice Number
             </label>
             <input
               type="text"
               class="text-sm block py-1 px-2 w-full pointer-events-none"
-              id="invoice-number" readonly
+              id="invoice-number"
+              readonly
               data-invoice-field
             />
           </div>
@@ -265,44 +266,51 @@
         class="flex-1 border border-gray-300 p-2 rounded shadow-md"
         id="invoice-preview"
       >
-        <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
-          INVOICE PREVIEW
+        <div
+          class="text-2xl text-center font-bold text-gray-950 p-1 mb-3 font-mono"
+        >
+          INVOICE
         </div>
         <div class="mt-2">
-          <p class="text-gray-600 text-sm h-8 p-1.5" id="preview-business-name">
+          <p class="text-gray-600 text-lg font-bold" id="preview-business-name">
             Business Name
           </p>
 
           <p
-            class="text-gray-600 text-sm h-8 p-1.5"
+            class="text-gray-600 text-sm leading-6 tracking-tight"
             id="preview-business-address"
           >
             Business Address
           </p>
           <p
-            class="text-gray-600 text-sm h-8 p-1.5"
+            class="text-gray-600 text-sm leading-6 tracking-tight"
             id="preview-business-email"
           >
             Business Email
           </p>
-          <p class="text-gray-600 text-sm h-8 p-1.5" id="preview-phone-number">
+          <p
+            class="text-gray-600 text-sm leading-6 tracking-tight"
+            id="preview-phone-number"
+          >
             Business Phone number
           </p>
         </div>
+        <hr />
 
         <!-- customer information preview -->
         <div>
           <div class="text-lg text-gray-950">Customer Info</div>
-          <p class="text-gray-600 text-sm h-8 p-1.5" id="preview-customer-name">
+          <p class="text-gray-600 text-sm leading-6" id="preview-customer-name">
             Customer name
           </p>
           <p
-            class="text-gray-600 text-sm h-8 p-1.5"
+            class="text-gray-600 text-sm leading-6"
             id="preview-customer-address"
           >
             Customer address
           </p>
         </div>
+        <hr>
         <!-- customer invoice -->
         <div>
           <div class="text-lg text-gray-950">Invoice Details</div>
@@ -320,6 +328,7 @@
         <table class="w-full border border-gray-300 rounded">
           <thead class="rounded">
             <tr class="text-sm font-medium text-left bg-gray-900 rounded">
+              <th class="font-light text-gray-200 text-center">S/N</th>
               <th class="font-light text-gray-200 text-center">Description</th>
               <th class="font-light text-center text-gray-200">Qty</th>
               <th class="font-light text-center text-gray-200">Unit Price</th>

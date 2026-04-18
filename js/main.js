@@ -38,11 +38,7 @@ function init() {
     "preview-phone-number",
     "Business Phone Number",
   );
-  syncInputToPreview(
-    "customer-name",
-    "preview-customer-name",
-    "Customer Address",
-  );
+  syncInputToPreview("customer-name", "preview-customer-name", "Customer Name");
   syncInputToPreview(
     "customer-address",
     "preview-customer-address",
@@ -127,6 +123,7 @@ function addNewRow() {
 }
 
 addItemBtn.addEventListener("click", addNewRow);
+
 function syncItemsToPreview() {
   const previewItemsBody = document.getElementById("preview-items-body");
   const previewSubtotal = document.getElementById("preview-subtotal");
@@ -136,9 +133,10 @@ function syncItemsToPreview() {
 
   let previewRowsHTML = "";
   let subTotal = 0;
+  let index = 1;
 
   const itemRows = document.querySelectorAll(".item-row");
-  itemRows.forEach((row) => {
+  itemRows.forEach((row, index) => {
     const desc = row.querySelector(".item-desc").value.trim();
     const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
     const price = parseFloat(row.querySelector(".item-price").value) || 0;
@@ -153,6 +151,8 @@ function syncItemsToPreview() {
 
     previewRowsHTML += `
       <tr class="p-1.5">
+
+            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${index += 1}</td>
             <td class="text-gray-600 text-center p-1.5 border border-gray-400">${desc}</td>
             <td class="text-gray-600 text-center p-1.5 border border-gray-400">${qty}</td>
             <td class="text-gray-600 text-center p-1.5 border border-gray-400">${formatMoney(price)}</td>
@@ -164,7 +164,7 @@ function syncItemsToPreview() {
   if (previewRowsHTML.trim() === "") {
     previewItemsBody.innerHTML = `
       <tr>
-        <td class="text-center text-gray-600 p-1.5" colspan="4">No Items</td>
+        <td class="text-center text-gray-600 p-1.5" colspan="5">No Items</td>
       </tr>`;
   } else {
     previewItemsBody.innerHTML = previewRowsHTML;
@@ -278,8 +278,8 @@ function loadInvoiceData() {
     invoiceNumberInput.value = newInvoiceNumber;
     previewInvoiceNumber.textContent = newInvoiceNumber;
 
-    const invoiceDate = document.getElementById("invoice-date")
-    invoiceDate.value = getTodayDate()
+    const invoiceDate = document.getElementById("invoice-date");
+    invoiceDate.value = getTodayDate();
 
     return;
   }
@@ -354,7 +354,7 @@ function resetInvoice() {
 
   // clear items row
   rowBody.innerHTML = "";
-  document.getElementById("invoice-date").value = getTodayDate()
+  document.getElementById("invoice-date").value = getTodayDate();
 
   addNewRow();
   localStorage.removeItem("invoiceData");
@@ -384,10 +384,8 @@ function generateInvoiceNumber() {
 
 console.log(generateInvoiceNumber());
 
+function getTodayDate() {
+  const today = new Date();
 
-function getTodayDate(){
-  const today = new Date()
-
-  return today.toISOString().split("T")[0]
-
+  return today.toISOString().split("T")[0];
 }
