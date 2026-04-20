@@ -147,6 +147,15 @@
               data-invoice-field
             />
           </div>
+          <div class="flex items-center gap-2.5">
+            <label for="invoice-date" class="text-gray-400">Due Date</label>
+            <input
+              type="date"
+              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              id="invoice-date"
+              data-invoice-field
+            />
+          </div>
 
           <!-- items -->
           <div class="mt-3 text-lg">Items</div>
@@ -243,7 +252,7 @@
             />
           </div>
 
-          <div class="action">
+          <div class="flex justify-between">
             <button
               type="button"
               id="reset-btn"
@@ -272,7 +281,10 @@
           INVOICE
         </div>
         <div class="mt-2">
-          <p class="text-gray-600 text-lg font-bold" id="preview-business-name">
+          <p
+            class="text-gray-900 text-base font-bold"
+            id="preview-business-name"
+          >
             Business Name
           </p>
 
@@ -299,31 +311,47 @@
 
         <!-- customer information preview -->
         <div>
-          <div class="text-lg text-gray-950">Customer Info</div>
-          <p class="text-gray-600 text-sm leading-6" id="preview-customer-name">
-            Customer name
-          </p>
-          <p
-            class="text-gray-600 text-sm leading-6"
-            id="preview-customer-address"
-          >
-            Customer address
-          </p>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <div class="text-base font-bold text-gray-900">Bill To:</div>
+              <p
+                class="text-gray-600 text-sm leading-6"
+                id="preview-customer-name"
+              >
+                Customer Name
+              </p>
+              <p
+                class="text-gray-600 text-sm leading-6"
+                id="preview-customer-address"
+              >
+                Customer Address
+              </p>
+              <p
+                class="text-gray-600 text-sm leading-6"
+                id="preview-customer-address"
+              >
+                Customer's Phone no
+              </p>
+            </div>
+
+            <div>
+              <div class="text-base font-bold text-gray-900">Invoice Info:</div>
+              <p
+                class="text-gray-600 text-sm font-medium"
+                id="preview-invoice-number"
+              >
+                Invoice number
+              </p>
+              <p class="text-gray-600 text-sm" id="preview-invoice-date">
+                Invoice date
+              </p>
+            </div>
+          </div>
         </div>
-        <hr>
+
+        <hr />
         <!-- customer invoice -->
-        <div>
-          <div class="text-lg text-gray-950">Invoice Details</div>
-          <p
-            class="text-gray-600 text-sm font-medium h-8 p-1.5"
-            id="preview-invoice-number"
-          >
-            Invoice number
-          </p>
-          <p class="text-gray-600 text-sm h-8 p-1.5" id="preview-invoice-date">
-            Invoice date
-          </p>
-        </div>
+
         <!-- preview table -->
         <table class="w-full border border-gray-300 rounded">
           <thead class="rounded">
