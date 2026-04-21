@@ -19,7 +19,7 @@
     <header
       class="mx-auto max-w-220 p-1.5 border-b border-gray-300 bg-white mb-3 sticky top-0 print:hidden"
     >
-      <div class="flex items-start justify-between">
+      <div class="md:flex items-start justify-between">
         <div>
           <h1 class="text-2xl font-semibold text-blue-600 font-fruktur">
             Your<b>Receipt</b>
@@ -28,11 +28,12 @@
             Simple receipts. Professional results.
           </p>
         </div>
-        <div class="flex gap-3">
+        <div class="gap-4 sm:flex">
           <button
             type="button"
             id="save-btn"
-            class="text-sm px-3 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-100 transition hover:cursor-pointer"
+            class="text-sm px-3 py-2 border border-gray-300 text-gray-700 
+            rounded hover:bg-gray-100 transition hover:cursor-pointer"
           >
             Save
           </button>
@@ -47,7 +48,7 @@
         </div>
       </div>
     </header>
-    <main class="flex gap-5 mx-auto max-w-220">
+    <main class="sm:flex gap-5 mx-auto max-w-220">
       <div class="w-full border border-gray-300 rounded flex-1 print:hidden">
         <form class="p-2 shadow-md" id="form">
           <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
@@ -255,24 +256,24 @@
           <div class="flex justify-between">
             <button
               type="button"
+              class="bg-blue-600 text-white text-sm px-3 py-2 rounded hover:bg-blue-700 hover:cursor-pointer transition"
+            >
+              Generate Invoice
+            </button>
+            <button
+              type="button"
               id="reset-btn"
               class="border border-gray-300 text-gray-700 px-3 rounded text-sm py-2 hover:bg-gray-100 hover:cursor-pointer transition"
               id="reset"
             >
               Reset
             </button>
-            <button
-              type="button"
-              class="bg-blue-600 text-white text-sm px-3 py-2 rounded hover:bg-blue-700 hover:cursor-pointer transition"
-            >
-              Generate Invoice
-            </button>
           </div>
         </form>
       </div>
       <!-- live Preview -->
       <div
-        class="flex-1 border border-gray-300 p-2 rounded shadow-md"
+        class="mt-4 flex-1 border border-gray-300 p-2 rounded shadow-md"
         id="invoice-preview"
       >
         <div
@@ -312,7 +313,7 @@
         <!-- customer information preview -->
         <div>
           <div class="grid grid-cols-2 gap-4">
-            <div>
+            <div class="borde">
               <div class="text-base font-bold text-gray-900">Bill To:</div>
               <p
                 class="text-gray-600 text-sm leading-6"
@@ -334,7 +335,7 @@
               </p>
             </div>
 
-            <div>
+            <div class="">
               <div class="text-base font-bold text-gray-900">Invoice Info:</div>
               <p
                 class="text-gray-600 text-sm font-medium"
@@ -349,11 +350,10 @@
           </div>
         </div>
 
-        <hr />
-        <!-- customer invoice -->
-
+        
+      
         <!-- preview table -->
-        <table class="w-full border border-gray-300 rounded">
+        <table class="w-full border border-gray-300 rounded mt-4">
           <thead class="rounded">
             <tr class="text-sm font-medium text-left bg-gray-900 rounded">
               <th class="font-light text-gray-200 text-center">S/N</th>
@@ -377,7 +377,7 @@
     </main>
 
     <footer class="text-right p-2 mt-4 print:hidden">
-      <div>Generate invoice with YourReceipt</div>
+      <div class="text-xs sm:text-base">Generate invoice with YourReceipt</div>
     </footer>
   </body>
 </html>
