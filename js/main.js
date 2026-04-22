@@ -150,13 +150,13 @@ function syncItemsToPreview() {
     subTotal += amount;
 
     previewRowsHTML += `
-      <tr class="p-1.5">
+      <tr class="p-2 sapce-y-1.5">
 
-            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${index += 1}</td>
-            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${desc}</td>
-            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${qty}</td>
-            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${formatMoney(price)}</td>
-            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${formatMoney(amount)}</td>
+            <td class="text-gray-600 text-center p-2 border border-gray-400">${(index += 1)}</td>
+            <td class="text-gray-600 text-center p-2 border border-gray-400">${desc}</td>
+            <td class="text-gray-600 text-center p-2 border border-gray-400">${qty}</td>
+            <td class="text-gray-600 text-center p-2 border border-gray-400">${formatMoney(price)}</td>
+            <td class="text-gray-600 text-center p-2 border border-gray-400">${formatMoney(amount)}</td>
       </tr>
     `;
   });
@@ -164,7 +164,7 @@ function syncItemsToPreview() {
   if (previewRowsHTML.trim() === "") {
     previewItemsBody.innerHTML = `
       <tr>
-        <td class="text-center text-gray-600 p-1.5" colspan="5">No Items</td>
+        <td class="text-center text-gray-600 p-2" colspan="5">No Items</td>
       </tr>`;
   } else {
     previewItemsBody.innerHTML = previewRowsHTML;
@@ -178,10 +178,10 @@ function syncItemsToPreview() {
   const discountAmount = subTotal * (discountRate / 100);
   const total = subTotal + taxAmount - discountAmount;
 
-  previewSubtotal.textContent = `Subtotal: ${formatMoney(subTotal)}`;
-  previewTax.textContent = `Tax (${taxRate}%): ${formatMoney(taxAmount)}`;
-  previewDiscount.textContent = `Discount (${discountRate}%): ${formatMoney(discountAmount)}`;
-  previewTotal.textContent = `Total: ${formatMoney(total)}`;
+  previewSubtotal.textContent = `${formatMoney(subTotal)}`;
+  previewTax.textContent = ` ${formatMoney(taxAmount)}`;
+  previewDiscount.textContent = `${formatMoney(discountAmount)}`;
+  previewTotal.textContent = `${formatMoney(total)}`;
 
   saveInvoiceData();
 }
