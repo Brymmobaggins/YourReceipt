@@ -389,3 +389,8 @@ function getTodayDate() {
 
   return today.toISOString().split("T")[0];
 }
+
+
+function previewInvoice(){
+  
+}

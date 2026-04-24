@@ -13,6 +13,13 @@
       sizes="32x32"
       href="/assests/images/receipt-logo.png"
     />
+    <!-- htmltopdf cdn -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+      integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="/js/main.js" defer></script>
   </head>
   <body class="bg-gray-white min-h-screen print:bg-white">
@@ -34,7 +41,7 @@
             id="save-btn"
             class="text-sm font-medium tracking-tight px-1.5 py-1 border border-gray-300 text-gray-700 rounded hover:bg-gray-100 transition hover:cursor-pointer"
           >
-            Save
+            Download as PDF
           </button>
 
           <button
@@ -252,17 +259,11 @@
             />
           </div>
 
-          <div class="flex justify-between">
-            <button
-              type="button"
-              class="bg-blue-500 text-white text-sm px-1.5 py-1 font-medium rounded hover:bg-blue-600 hover:cursor-pointer transition"
-            >
-              Generate Invoice
-            </button>
+          <div class="">
             <button
               type="button"
               id="reset-btn"
-              class="border border-gray-300 text-gray-700 px-1.5 rounded text-sm font-medium py-1 hover:bg-gray-100 hover:cursor-pointer transition"
+              class="border border-gray-400 text-gray-700 px-1.5 rounded text-sm font-medium py-1 hover:bg-gray-100 hover:cursor-pointer transition"
               id="reset"
             >
               Reset

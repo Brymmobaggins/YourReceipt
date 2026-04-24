@@ -75,3 +75,74 @@ for the print() function to work, i wrapped preview invoice in it own container.
 | [ Generate Invoice ] | |
 | [ Reset ] | |
 +-----------------------------------+----------------------------------------------+
+
+
+
++---------------------------------------------+
+| yourreceipt                                 |
+| Simple receipts. Professional results.      |
+| [ Save ]   [ Print ]                        |
++---------------------------------------------+
+
+| CREATE INVOICE                              |
+|---------------------------------------------|
+| Business Info                               |
+| [ Business Name___________ ]                |
+| [ Address_______________ ]                 |
+| [ Email_________________ ]                 |
+| [ Phone_________________ ]                 |
+
+| Customer Info                               |
+| [ Customer Name_________ ]                 |
+| [ Customer Address______ ]                 |
+
+| Invoice Details                             |
+| [ Invoice No___________ ]                  |
+| [ Invoice Date_________ ]                 |
+| [ Due Date____________ ]                  |
+
+| Items                                       |
+|---------------------------------------------|
+| Desc       Qty     Price     [X]             |
+| [______]   [__]    [____]    [X]             |
+| [______]   [__]    [____]    [X]             |
+| [ + Add Item ]                              |
+
+| Charges                                     |
+| [ Tax %________ ]                           |
+| [ Discount_____ ]                           |
+
+| [ Generate Invoice ]                        |
+| [ Reset ]                                   |
+
++---------------------------------------------+
+
+| LIVE PREVIEW                                |
+|---------------------------------------------|
+| [ LOGO ]                                    |
+| Business Name                               |
+| Address | Email | Phone                     |
+
+| Bill To:                                    |
+| Customer Name                               |
+| Customer Address                            |
+
+| Invoice #: YR-0001                          |
+| Date: 20/04/2026                            |
+| Due: 27/04/2026                             |
+
+|---------------------------------------------|
+| # | Desc | Qty | Price | Amount             |
+|---------------------------------------------|
+| 1 | A    | 2   | 5000  | 10000              |
+| 2 | B    | 1   | 700   | 700                |
+|---------------------------------------------|
+
+| Subtotal: ₦13,000                           |
+| Tax: ₦1,300                                 |
+| Discount: ₦500                              |
+| Total: ₦13,800                              |
+
+| Notes:                                      |
+| ____________________________               |
++---------------------------------------------+
