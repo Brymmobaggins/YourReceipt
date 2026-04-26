@@ -119,7 +119,7 @@ function addNewRow() {
   const newRow = createItemRow();
   rowBody.appendChild(newRow);
   syncItemsToPreview();
-  saveInvoiceData();
+  // saveInvoiceData();
 }
 
 addItemBtn.addEventListener("click", addNewRow);
@@ -183,7 +183,7 @@ function syncItemsToPreview() {
   previewDiscount.textContent = `${formatMoney(discountAmount)}`;
   previewTotal.textContent = `${formatMoney(total)}`;
 
-  saveInvoiceData();
+  // saveInvoiceData();
 }
 
 document.addEventListener("input", function (e) {
@@ -205,7 +205,7 @@ function handleDeleteRow(btn) {
   if (row) {
     row.remove();
     syncItemsToPreview();
-    saveInvoiceData();
+    // saveInvoiceData();
   }
 }
 
@@ -335,11 +335,10 @@ function loadInvoiceData() {
 loadInvoiceData();
 
 // this function job is to call the `getInvoiceData()` converts the result to JSON, and store it in local storage. why did i convert plain object to string? because local storage can not store plain object directly, it only stores strings.
-function saveInvoiceData() {
-  const invoiceData = getInvoiceData();
-  localStorage.setItem("invoiceData", JSON.stringify(invoiceData));
-}
-saveBtn.addEventListener("click", saveInvoiceData);
+// function saveInvoiceData() {
+//   const invoiceData = getInvoiceData();
+//   localStorage.setItem("invoiceData", JSON.stringify(invoiceData));
+// }
 
 // find all inputs with `data-invoice-field` attribute and trigger their `input` events.
 document.querySelectorAll("[data-invoice-field]").forEach((input) => {
@@ -390,7 +389,31 @@ function getTodayDate() {
   return today.toISOString().split("T")[0];
 }
 
-
-function previewInvoice(){
+saveBtn.addEventListener("click", function(){
+  syncItemsToPreview()
+  exportInvoiceToPDf()
+  console.log("hello world")
   
+})
+
+function exportInvoiceToPDf() {
+  const invoicePreview = document.getElementById("invoice-preview");
+
+  const options = {
+    margin: 10,
+    filename: "YourReceipt-invoice.pdf",
+    image: {
+      type: "jpeg",
+      quality: 0.98,
+    },
+    htmlcanvas: {
+      scale: 2,
+    },
+    jsPDF: {
+      unit: "mm",
+      format: "a4",
+      orientation: "portrait",
+    },
+  };
+  html2pdf().set(options).from(invoicePreview).save();
 }
