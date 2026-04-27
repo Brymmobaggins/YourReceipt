@@ -31,13 +31,15 @@ input[type="number"]::-webkit-inner-spin-button {
   /* color: #111827; */
 }
 
-#invoice-preview * {
-  color: inherit;
+
+.pdf-safe {
+  background: #ffffff;
+  color: #111827;
 }
-.pdf-safe,
-.pdf-safe * {
-  /* color: #111827 !important; */
-  background-color: #ffffff !important;
+
+.pdf-safe table,
+.pdf-safe th,
+.pdf-safe td {
   border-color: #d1d5db !important;
 }
 
