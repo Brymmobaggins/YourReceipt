@@ -1,6 +1,6 @@
 /*! tailwindcss v4.2.1 | MIT License | https://tailwindcss.com */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Fruktur:ital@0;1&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fruktur:ital@0;1&display=swap");
 @layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
@@ -503,12 +503,6 @@
       }
     }
   }
-  .focus\:border-1 {
-    &:focus {
-      border-style: var(--tw-border-style);
-      border-width: 1px;
-    }
-  }
   .focus\:border-2 {
     &:focus {
       border-style: var(--tw-border-style);
@@ -586,6 +580,18 @@ form label {
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+#invoice-preview {
+  background: #ffffff;
+  color: #111827;
+}
+#invoice-preview * {
+  color: inherit;
+}
+.pdf-safe, .pdf-safe * {
+  color: #111827 !important;
+  background-color: #ffffff !important;
+  border-color: #d1d5db !important;
 }
 @media print {
   main {

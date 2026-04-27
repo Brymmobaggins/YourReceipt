@@ -14,13 +14,8 @@
       href="/assests/images/receipt-logo.png"
     />
     <!-- htmltopdf cdn -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-      integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script src="/js/main.js" defer></script>
+    <script defer src="https://unpkg.com/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+    <script defer src="../js/main.js"></script>
   </head>
   <body class="bg-gray-white min-h-screen print:bg-white">
     <header
@@ -37,7 +32,7 @@
         </div>
         <div class="gap-4 mt-2 sm:mt-0 sm:flex">
           <button
-            type="button"
+            type="download"
             id="save-btn"
             class="text-sm font-medium tracking-tight px-1.5 py-1 border border-gray-300 text-gray-700 rounded hover:bg-gray-100 transition hover:cursor-pointer"
           >
@@ -69,7 +64,7 @@
             </label>
             <input
               type="text"
-              class="border border-gray-300 focus:border-blue-500 focus:border-1 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-blue-500 text-sm block py-1 px-2 w-full"
               id="business-name"
               data-invoice-field
             />

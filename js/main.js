@@ -1,4 +1,6 @@
 /** @format */
+// Ensure html2pdf is available (if using modules, uncomment the next line):
+// import html2pdf from "html2pdf.js";
 const rowBody = document.querySelector("#row-body");
 const addItemBtn = document.getElementById("add-item-btn");
 const resetBtn = document.getElementById("reset-btn");
@@ -334,11 +336,11 @@ function loadInvoiceData() {
 }
 loadInvoiceData();
 
-// this function job is to call the `getInvoiceData()` converts the result to JSON, and store it in local storage. why did i convert plain object to string? because local storage can not store plain object directly, it only stores strings.
-// function saveInvoiceData() {
-//   const invoiceData = getInvoiceData();
-//   localStorage.setItem("invoiceData", JSON.stringify(invoiceData));
-// }
+// localStorage only stores strings, so the invoice object is saved as JSON.
+function saveInvoiceData() {
+  const invoiceData = getInvoiceData();
+  localStorage.setItem("invoiceData", JSON.stringify(invoiceData));
+}
 
 // find all inputs with `data-invoice-field` attribute and trigger their `input` events.
 document.querySelectorAll("[data-invoice-field]").forEach((input) => {
@@ -381,39 +383,61 @@ function generateInvoiceNumber() {
   return `INVOICE NO-${String(counter).padStart(4, "0")}`;
 }
 
-console.log(generateInvoiceNumber());
-
 function getTodayDate() {
   const today = new Date();
 
   return today.toISOString().split("T")[0];
 }
 
-saveBtn.addEventListener("click", function(){
-  syncItemsToPreview()
-  exportInvoiceToPDf()
-  console.log("hello world")
-  
-})
+function generatePdfFilename() {
+  const invoiceNumber =
+    document.getElementById("invoice-number").value || "invoice";
+  const invoiceDate =
+    document.getElementById("invoice-date").value || getTodayDate();
+  const safeInvoiceNumber = invoiceNumber.replace(/[^a-zA-Z0-9-_]/g, "_");
 
-function exportInvoiceToPDf() {
-  const invoicePreview = document.getElementById("invoice-preview");
+  return `${safeInvoiceNumber}_${invoiceDate}.pdf`;
+}
 
-  const options = {
+function getPdfOptions() {
+  return {
     margin: 10,
-    filename: "YourReceipt-invoice.pdf",
-    image: {
-      type: "jpeg",
-      quality: 0.98,
-    },
-    htmlcanvas: {
-      scale: 2,
-    },
+    filename: generatePdfFilename(),
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
     jsPDF: {
       unit: "mm",
       format: "a4",
       orientation: "portrait",
     },
   };
-  html2pdf().set(options).from(invoicePreview).save();
 }
+
+function exportInvoiceToPDF() {
+  const invoicePreview = document.getElementById("invoice-preview");
+
+  // add PDF-safe styling
+  invoicePreview.classList.add("pdf-safe");
+  const options = getPdfOptions()
+
+  html2pdf()
+    .set(options)
+    .from(invoicePreview)
+    .save()
+    .then(() => {
+      // remove the styling after export
+      invoicePreview.classList.remove("pdf-safe");
+    })
+    .catch((error) => {
+      invoicePreview.classList.remove("pdf-safe");
+      console.error("PDF export failed:", error);
+      alert("PDF export failed. Check console.");
+    });
+}
+
+function handleSaveInvoice() {
+  syncItemsToPreview();
+  exportInvoiceToPDF();
+}
+
+saveBtn.addEventListener("click", handleSaveInvoice);
