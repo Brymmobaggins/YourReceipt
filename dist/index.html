@@ -64,7 +64,7 @@
             </label>
             <input
               type="text"
-              class="border border-gray-300 focus:border-blue-500 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="business-name"
               data-invoice-field
             />
@@ -74,7 +74,7 @@
             <label for="address" class="text-gray-400">Address</label>
             <input
               type="text"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="business-address"
               data-invoice-field
             />
@@ -84,7 +84,7 @@
             <label for="email" class="text-gray-400">Email</label>
             <input
               type="text"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="business-email"
               data-invoice-field
             />
@@ -94,7 +94,7 @@
             <label for="text" class="text-gray-400">Phone</label>
             <input
               type="number"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="business-phone"
               data-invoice-field
             />
@@ -108,7 +108,7 @@
             </label>
             <input
               type="text"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="customer-name"
               data-invoice-field
             />
@@ -118,7 +118,7 @@
             <label for="address" class="text-gray-400">Customer Address</label>
             <input
               type="text"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="customer-address"
               data-invoice-field
             />
@@ -144,7 +144,7 @@
             <label for="invoice-date" class="text-gray-400">Invoice Date</label>
             <input
               type="date"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="invoice-date"
               data-invoice-field
             />
@@ -153,7 +153,7 @@
             <label for="invoice-date" class="text-gray-400">Due Date</label>
             <input
               type="date"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="invoice-date"
               data-invoice-field
             />
@@ -187,14 +187,14 @@
               <tr class="item-row">
                 <td class="border border-gray-400 p-1.5">
                   <input
-                    class="item-desc border border-gray-400 focus:border-gray-500 focus:ring-2 w-full px-2 py-1 break-word"
+                    class="item-desc border-gray-300 focus:border-sky-600 focus:border-2 w-full px-2 py-1 break-word"
                     type="text"
                     data-invoice-field
                   />
                 </td>
                 <td class="border border-gray-400 p-1.5">
                   <input
-                    class="item-qty border border-gray-400 w-full px-2 py-1 focus:border-gray-500 focus:border-2"
+                    class="item-qty border-gray-300 focus:border-sky-600 focus:border-2 w-full px-2 py-1"
                     type="number"
                     min="1"
                     data-invoice-field
@@ -202,7 +202,7 @@
                 </td>
                 <td class="border border-gray-400 p-1.5">
                   <input
-                    class="item-price border border-gray-400 focus:border-gray-500 focus:border-2 w-full px-2 py-1"
+                    class="item-price border-gray-300 focus:border-sky-600 focus:border-2 w-full px-2 py-1"
                     type="text"
                     data-invoice-field
                   />
@@ -240,7 +240,7 @@
             <input
               type="number"
               id="tax"
-              class="border border-gray-400 focus:border-2 rounded px-2 py-1 w-full text-sm"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 rounded px-2 py-1 w-full text-sm"
               data-invoice-field
             />
           </div>
@@ -249,7 +249,7 @@
             <input
               type="number"
               id="discount"
-              class="border border-gray-400 focus:border-2 rounded px-2 py-1 w-full text-sm"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 rounded px-2 py-1 w-full text-sm"
               data-invoice-field
             />
           </div>
@@ -348,8 +348,8 @@
         <!-- preview table -->
         <table class="w-full border border-gray-300 rounded mt-4">
           <thead class="rounded">
-            <tr class="text-sm font-medium text-left bg-gray-900 rounded">
-              <th class="font-light text-gray-200 text-center">S/N</th>
+            <tr class="text-sm font-medium text-left rounded bg-black text-white">
+              <th class="font-light text-white text-center">S/N</th>
               <th class="font-light text-gray-200 text-center">Description</th>
               <th class="font-light text-center text-gray-200">Qty</th>
               <th class="font-light text-center text-gray-200">Unit Price</th>

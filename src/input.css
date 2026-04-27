@@ -28,7 +28,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 #invoice-preview {
   background: #ffffff;
-  color: #111827;
+  /* color: #111827; */
 }
 
 #invoice-preview * {
@@ -36,7 +36,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 .pdf-safe,
 .pdf-safe * {
-  color: #111827 !important;
+  /* color: #111827 !important; */
   background-color: #ffffff !important;
   border-color: #d1d5db !important;
 }

@@ -12,9 +12,11 @@
     --color-red-100: oklch(93.6% 0.032 17.717);
     --color-red-200: oklch(88.5% 0.062 18.334);
     --color-red-700: oklch(50.5% 0.213 27.518);
+    --color-sky-600: oklch(58.8% 0.158 241.966);
     --color-blue-50: oklch(97% 0.014 254.604);
     --color-blue-100: oklch(93.2% 0.032 255.585);
     --color-blue-200: oklch(88.2% 0.059 254.128);
+    --color-blue-400: oklch(70.7% 0.165 254.624);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-blue-700: oklch(48.8% 0.243 264.376);
@@ -27,6 +29,7 @@
     --color-gray-700: oklch(37.3% 0.034 259.733);
     --color-gray-900: oklch(21% 0.034 264.665);
     --color-gray-950: oklch(13% 0.028 261.692);
+    --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
     --text-xs: 0.75rem;
@@ -318,6 +321,9 @@
   .border-blue-200 {
     border-color: var(--color-blue-200);
   }
+  .border-blue-400 {
+    border-color: var(--color-blue-400);
+  }
   .border-gray-200 {
     border-color: var(--color-gray-200);
   }
@@ -329,6 +335,9 @@
   }
   .border-red-200 {
     border-color: var(--color-red-200);
+  }
+  .bg-black {
+    background-color: var(--color-black);
   }
   .bg-blue-50 {
     background-color: var(--color-blue-50);
@@ -466,6 +475,9 @@
   .text-red-700 {
     color: var(--color-red-700);
   }
+  .text-white {
+    color: var(--color-white);
+  }
   .shadow-md {
     --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -509,14 +521,30 @@
       border-width: 2px;
     }
   }
+  .focus\:border-22 {
+    &:focus {
+      border-style: var(--tw-border-style);
+      border-width: 22px;
+    }
+  }
   .focus\:border-blue-500 {
     &:focus {
       border-color: var(--color-blue-500);
     }
   }
+  .focus\:border-blue-600 {
+    &:focus {
+      border-color: var(--color-blue-600);
+    }
+  }
   .focus\:border-gray-500 {
     &:focus {
       border-color: var(--color-gray-500);
+    }
+  }
+  .focus\:border-sky-600 {
+    &:focus {
+      border-color: var(--color-sky-600);
     }
   }
   .focus\:ring-2 {
@@ -583,13 +611,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 }
 #invoice-preview {
   background: #ffffff;
-  color: #111827;
 }
 #invoice-preview * {
   color: inherit;
 }
 .pdf-safe, .pdf-safe * {
-  color: #111827 !important;
   background-color: #ffffff !important;
   border-color: #d1d5db !important;
 }
