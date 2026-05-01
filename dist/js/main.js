@@ -52,6 +52,8 @@ function init() {
     "Invoice Number",
   );
   syncInputToPreview("invoice-date", "preview-invoice-date", "Invoice Date");
+
+  handleLogoUpload();
 }
 
 init();
@@ -215,7 +217,36 @@ prinBtn.addEventListener("click", function () {
   window.print();
 });
 
+function handleLogoUpload() {
+  const businessLogo = document.getElementById("business-logo");
+  const previewLogo = document.getElementById("preview-logo");
+  businessLogo.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function () {
+      const base64image = reader.result;
+
+      previewLogo.src = base64image;
+      previewLogo.classList.remove("hidden");
+
+      // save into state
+      previewLogo.dataset.logo = base64image;
+
+      // trigger
+      saveInvoiceData();
+    });
+    reader.readAsDataURL(file);
+  });
+}
+
 function getInvoiceData() {
+  const previewLogo = document.getElementById("preview-logo");
+  const businessLogo =
+    previewLogo.src && !classList.contains("hidden") ? previewLogo.src : "";
   const businessName = document.getElementById("business-name").value;
   const businessAddress = document.getElementById("business-address").value;
   const businessEmail = document.getElementById("business-email").value;
@@ -246,6 +277,7 @@ function getInvoiceData() {
 
   const invoiceData = {
     business: {
+      logo: businessLogo,
       name: businessName,
       address: businessAddress,
       email: businessEmail,
@@ -268,6 +300,7 @@ function getInvoiceData() {
   return invoiceData;
 }
 
+// load invoice data from local storage when it is refesshed
 function loadInvoiceData() {
   const savedData = localStorage.getItem("invoiceData");
   const previewInvoiceNumber = document.getElementById(
@@ -287,6 +320,13 @@ function loadInvoiceData() {
   }
 
   const invoiceData = JSON.parse(savedData);
+
+  const previewLogo = document.getElementById("preview-logo");
+
+  if (invoiceData.business.logo) {
+    previewLogo.src = invoiceData.business.logo;
+    previewLogo.classList.remove("hidden");
+  }
 
   const restoredInvoiceNumber =
     invoiceData.invoice.number || generateInvoiceNumber();
@@ -418,7 +458,7 @@ function exportInvoiceToPDF() {
 
   // add PDF-safe styling
   invoicePreview.classList.add("pdf-safe");
-  const options = getPdfOptions()
+  const options = getPdfOptions();
 
   html2pdf()
     .set(options)

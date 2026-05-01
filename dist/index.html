@@ -14,7 +14,10 @@
       href="./assests/images/receipt-logo.png"
     />
     <!-- htmltopdf cdn -->
-    <script defer src="https://unpkg.com/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+    <script
+      defer
+      src="https://unpkg.com/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"
+    ></script>
     <script defer src="./js/main.js"></script>
   </head>
   <body class="bg-gray-white min-h-screen print:bg-white">
@@ -32,19 +35,18 @@
         </div>
         <div class="gap-4 mt-2 sm:mt-0 sm:flex">
           <button
-            type="download"
-            id="save-btn"
-            class="text-sm font-medium tracking-tight px-1.5 py-1 border border-gray-300 text-gray-700 rounded hover:bg-gray-100 transition hover:cursor-pointer"
-          >
-            Download as PDF
-          </button>
-
-          <button
             type="button"
             id="print-btn"
             class="text-sm font-medium tracking-tight px-1.5 py-1 border border-blue-200 bg-blue-50 text-blue-700 rounded hover:bg-blue-100 transition hover:cursor-pointer"
           >
             Print
+          </button>
+          <button
+            type="download"
+            id="save-btn"
+            class="text-sm font-medium tracking-tight px-1.5 py-1 border border-gray-300 text-gray-700 rounded transition hover:bg-gray-100 hover:cursor-pointer"
+          >
+            Download as PDF
           </button>
         </div>
       </div>
@@ -58,6 +60,14 @@
           <div class="text-gray-950 text-lg hr">Business Info</div>
           <hr class="border-gray-200 border" />
           <!-- business name -->
+          <div>
+            <input
+              type="file"
+              id="business-logo"
+              accept="image/*" class="text-sm"
+              data-invoice-field
+            />
+          </div>
           <div class="flex items-center gap-2">
             <label for="business-name" class="text-gray-400"
               >Business Name
@@ -70,7 +80,7 @@
             />
           </div>
           <!-- Address -->
-          <div class="flex items-center gap-2.5">
+          <div class="flex items-center gap-2">
             <label for="address" class="text-gray-400">Address</label>
             <input
               type="text"
@@ -187,16 +197,14 @@
               <tr class="item-row">
                 <td class="border border-gray-400 p-1.5">
                   <input
-                    class="item-desc border border-gray-300 focus:border-sky-600 focus:border-2 
-                    w-full px-2 py-1 break-word"
+                    class="item-desc border border-gray-300 focus:border-sky-600 focus:border-2 w-full px-2 py-1 break-word"
                     type="text"
                     data-invoice-field
                   />
                 </td>
                 <td class="border border-gray-400 p-1.5">
                   <input
-                    class="item-qty border border-gray-300 focus:border-sky-600 focus:border-2 
-                    w-full px-2 py-1"
+                    class="item-qty border border-gray-300 focus:border-sky-600 focus:border-2 w-full px-2 py-1"
                     type="number"
                     min="1"
                     data-invoice-field
@@ -260,7 +268,7 @@
             <button
               type="button"
               id="reset-btn"
-              class="border border-gray-400 text-gray-700 px-1.5 rounded text-sm font-medium py-1 hover:bg-gray-100 hover:cursor-pointer transition"
+              class="border border-gray-400 text-gray-700 px-1.5 rounded text-sm font-medium py-1 hover:bg-gray-100 hover:cursor-pointer transition tracking-tight"
               id="reset"
             >
               Reset
@@ -279,6 +287,9 @@
           INVOICE
         </div>
         <div class="mt-2">
+          <div>
+            <img id="preview-logo" class="hidden" alt="preview-logo" />
+          </div>
           <p
             class="text-gray-900 text-base font-bold"
             id="preview-business-name"
@@ -350,7 +361,9 @@
         <!-- preview table -->
         <table class="w-full border border-gray-300 rounded mt-4">
           <thead class="rounded">
-            <tr class="text-sm font-medium text-left rounded bg-black text-white">
+            <tr
+              class="text-sm font-medium text-left rounded bg-black text-white"
+            >
               <th class="font-light text-white text-center">S/N</th>
               <th class="font-light text-gray-200 text-center">Description</th>
               <th class="font-light text-center text-gray-200">Qty</th>
