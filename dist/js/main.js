@@ -6,6 +6,7 @@ const addItemBtn = document.getElementById("add-item-btn");
 const resetBtn = document.getElementById("reset-btn");
 const prinBtn = document.getElementById("print-btn");
 const saveBtn = document.getElementById("save-btn");
+const previewLogo = document.getElementById("preview-logo");
 
 function init() {
   syncInputToPreview("business-name", "preview-business-name", "Business Name");
@@ -219,7 +220,7 @@ prinBtn.addEventListener("click", function () {
 
 function handleLogoUpload() {
   const businessLogo = document.getElementById("business-logo");
-  const previewLogo = document.getElementById("preview-logo");
+
   businessLogo.addEventListener("change", function () {
     const file = this.files[0];
 
@@ -244,9 +245,10 @@ function handleLogoUpload() {
 }
 
 function getInvoiceData() {
-  const previewLogo = document.getElementById("preview-logo");
   const businessLogo =
-    previewLogo.src && !classList.contains("hidden") ? previewLogo.src : "";
+    previewLogo && !previewLogo.classList.contains("hidden")
+      ? previewLogo.src
+      : "";
   const businessName = document.getElementById("business-name").value;
   const businessAddress = document.getElementById("business-address").value;
   const businessEmail = document.getElementById("business-email").value;
@@ -321,8 +323,6 @@ function loadInvoiceData() {
 
   const invoiceData = JSON.parse(savedData);
 
-  const previewLogo = document.getElementById("preview-logo");
-
   if (invoiceData.business.logo) {
     previewLogo.src = invoiceData.business.logo;
     previewLogo.classList.remove("hidden");
@@ -389,6 +389,11 @@ document.querySelectorAll("[data-invoice-field]").forEach((input) => {
 
 // fuction to reset
 function resetInvoice() {
+  const logoUpload = document.getElementById("business-logo");
+  previewLogo.src = "";
+  previewLogo.classList.add("hidden");
+  logoUpload.value = "";
+
   document.querySelectorAll("input").forEach((input) => {
     input.value = "";
   });

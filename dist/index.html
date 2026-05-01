@@ -37,14 +37,14 @@
           <button
             type="button"
             id="print-btn"
-            class="text-sm font-medium tracking-tight px-1.5 py-1 border border-blue-200 bg-blue-50 text-blue-700 rounded hover:bg-blue-100 transition hover:cursor-pointer"
+            class="text-sm font-semibold tracking-tight px-1.5 py-1 border border-blue-200 bg-blue-50 text-blue-700 rounded hover:bg-blue-100 transition hover:cursor-pointer"
           >
             Print
           </button>
           <button
             type="download"
             id="save-btn"
-            class="text-sm font-medium tracking-tight px-1.5 py-1 border border-gray-300 text-gray-700 rounded transition hover:bg-gray-100 hover:cursor-pointer"
+            class="text-sm font-semibold tracking-tight px-1.5 py-1 border border-gray-300 text-gray-700 rounded transition hover:bg-gray-100 hover:cursor-pointer"
           >
             Download as PDF
           </button>
@@ -60,11 +60,13 @@
           <div class="text-gray-950 text-lg hr">Business Info</div>
           <hr class="border-gray-200 border" />
           <!-- business name -->
-          <div>
+          <div class="flex item-center mt-4">
+            <label for="" class="text-gray-400 ext-sm">Business logo</label>
             <input
               type="file"
               id="business-logo"
-              accept="image/*" class="text-sm"
+              accept="image/*"
+              class="block w-full text-sm text-gray-500 file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-500 file:text-white hover:file:bg-gray-600 hover:cursor-pointer"
               data-invoice-field
             />
           </div>
@@ -224,7 +226,7 @@
                 <td class="border border-gray-400 p-1.5 text-center">
                   <button
                     type="button"
-                    class="remove-btn border text-center border-red-200 text-red-700 w-full rounded px-1 py-0.5 text-sm font-medium hover:bg-red-100 hover:cursor-pointer"
+                    class="remove-btn border text-center border-red-200 text-red-700 w-full rounded px-1 py-0.5 text-sm font-semibold hover:bg-red-100 hover:cursor-pointer"
                   >
                     X
                   </button>
@@ -235,7 +237,7 @@
           <div class="mt-2">
             <button
               type="button"
-              class="border border-blue-200 mt-1 px-1.5 py-1 font-medium text-sm text-blue-700 rounded hover:cursor-pointer hover:bg-blue-100 transition"
+              class="border border-blue-200 mt-1 px-1.5 py-1 font-semibold text-sm text-blue-700 rounded hover:cursor-pointer hover:bg-blue-100 transition"
               id="add-item-btn"
             >
               + Add Item
@@ -268,7 +270,7 @@
             <button
               type="button"
               id="reset-btn"
-              class="border border-gray-400 text-gray-700 px-1.5 rounded text-sm font-medium py-1 hover:bg-gray-100 hover:cursor-pointer transition tracking-tight"
+              class="border border-gray-400 text-gray-700 px-1.5 rounded text-sm font-semibold py-1 hover:bg-gray-100 hover:cursor-pointer transition tracking-tight"
               id="reset"
             >
               Reset
@@ -288,7 +290,11 @@
         </div>
         <div class="mt-2">
           <div class="w-32 h-16 flex item-center mb-2">
-            <img id="preview-logo" class="hidden object-fit h-full w-full" alt="preview-logo" />
+            <img
+              id="preview-logo"
+              class="hidden object-fit h-full w-full"
+              alt="preview-logo"
+            />
           </div>
           <p
             class="text-gray-900 text-base font-bold"

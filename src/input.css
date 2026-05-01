@@ -10,7 +10,9 @@
   --font-Roboto: "Roboto", sans-serif;
   --font-fruktur: "Fruktur", system-ui;
 }
-
+/* form input[type="file"]{
+  width: 3.5rem;
+} */
 form input {
   flex: 1;
   margin-bottom: 10px;
