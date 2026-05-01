@@ -279,17 +279,11 @@
   .flex-1 {
     flex: 1;
   }
-  .flex-none {
-    flex: none;
-  }
   .table-fixed {
     table-layout: fixed;
   }
   .border-collapse {
     border-collapse: collapse;
-  }
-  .resize {
-    resize: both;
   }
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -314,13 +308,6 @@
   }
   .gap-5 {
     gap: calc(var(--spacing) * 5);
-  }
-  .space-y-1 {
-    :where(& > :not(:last-child)) {
-      --tw-space-y-reverse: 0;
-      margin-block-start: calc(calc(var(--spacing) * 1) * var(--tw-space-y-reverse));
-      margin-block-end: calc(calc(var(--spacing) * 1) * calc(1 - var(--tw-space-y-reverse)));
-    }
   }
   .space-y-1\.5 {
     :where(& > :not(:last-child)) {
@@ -388,9 +375,6 @@
   }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
-  }
-  .py-0 {
-    padding-block: calc(var(--spacing) * 0);
   }
   .py-0\.5 {
     padding-block: calc(var(--spacing) * 0.5);
@@ -507,16 +491,9 @@
   .text-white {
     color: var(--color-white);
   }
-  .underline {
-    text-decoration-line: underline;
-  }
   .shadow-md {
     --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
@@ -539,16 +516,6 @@
       border-width: 0px;
     }
   }
-  .file\:bg-black {
-    &::file-selector-button {
-      background-color: var(--color-black);
-    }
-  }
-  .file\:bg-blue-50 {
-    &::file-selector-button {
-      background-color: var(--color-blue-50);
-    }
-  }
   .file\:bg-gray-500 {
     &::file-selector-button {
       background-color: var(--color-gray-500);
@@ -559,19 +526,9 @@
       padding-inline: calc(var(--spacing) * 2);
     }
   }
-  .file\:px-4 {
-    &::file-selector-button {
-      padding-inline: calc(var(--spacing) * 4);
-    }
-  }
   .file\:py-1 {
     &::file-selector-button {
       padding-block: calc(var(--spacing) * 1);
-    }
-  }
-  .file\:py-2 {
-    &::file-selector-button {
-      padding-block: calc(var(--spacing) * 2);
     }
   }
   .file\:text-sm {
@@ -584,11 +541,6 @@
     &::file-selector-button {
       --tw-font-weight: var(--font-weight-semibold);
       font-weight: var(--font-weight-semibold);
-    }
-  }
-  .file\:text-blue-700 {
-    &::file-selector-button {
-      color: var(--color-blue-700);
     }
   }
   .file\:text-white {
@@ -621,24 +573,6 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-red-100);
-      }
-    }
-  }
-  .hover\:file\:bg-blue-100 {
-    &:hover {
-      @media (hover: hover) {
-        &::file-selector-button {
-          background-color: var(--color-blue-100);
-        }
-      }
-    }
-  }
-  .hover\:file\:bg-gray-100 {
-    &:hover {
-      @media (hover: hover) {
-        &::file-selector-button {
-          background-color: var(--color-gray-100);
-        }
       }
     }
   }
@@ -839,11 +773,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
   inherits: false;
   initial-value: 0 0 #0000;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -866,7 +795,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
-      --tw-outline-style: solid;
     }
   }
 }
