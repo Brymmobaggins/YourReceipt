@@ -21,7 +21,7 @@ form input {
 }
 
 form label {
-  width: 100px;
+  width: 80px;
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {

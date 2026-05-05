@@ -54,6 +54,8 @@ function init() {
   );
   syncInputToPreview("invoice-date", "preview-invoice-date", "Invoice Date");
 
+  syncInputToPreview("invoice-status", "preview-status", "Unpaid");
+
   handleLogoUpload();
 }
 
@@ -135,6 +137,17 @@ function syncItemsToPreview() {
   const previewTax = document.getElementById("preview-tax");
   const previewTotal = document.getElementById("preview-total");
   const previewDiscount = document.getElementById("preview-discount");
+
+  const status = document.getElementById("invoice-status").value;
+  const previewStatus = document.getElementById("preview-status");
+
+  if (status === "Paid") {
+    previewStatus.textContent = "Paid";
+    previewStatus.className = "text-green-600 font-semibold text-sm";
+  } else {
+    previewStatus.textContent = "Unpaid";
+    previewStatus.className = "text-red-600 font-semibold text-sm";
+  }
 
   let previewRowsHTML = "";
   let subTotal = 0;
@@ -259,7 +272,7 @@ function getInvoiceData() {
 
   const invoiceNumber = document.getElementById("invoice-number").value;
   const invoiceDate = document.getElementById("invoice-date").value;
-
+  const invoiceStatus = document.getElementById("invoice-status").value;
   const tax = parseFloat(document.getElementById("tax").value) || 0;
   const discount = parseFloat(document.getElementById("discount").value) || 0;
 
@@ -292,6 +305,7 @@ function getInvoiceData() {
     invoice: {
       number: invoiceNumber,
       date: invoiceDate,
+      status: invoiceStatus,
     },
     charges: {
       tax,
@@ -315,9 +329,12 @@ function loadInvoiceData() {
     invoiceNumberInput.value = newInvoiceNumber;
     previewInvoiceNumber.textContent = newInvoiceNumber;
 
+    // restore in invoice date
     const invoiceDate = document.getElementById("invoice-date");
     invoiceDate.value = getTodayDate();
 
+    //  restore invoice status
+    document.getElementById("invoice-status").value || "Unpaid";
     return;
   }
 
@@ -332,6 +349,9 @@ function loadInvoiceData() {
     invoiceData.invoice.number || generateInvoiceNumber();
   invoiceNumberInput.value = restoredInvoiceNumber;
   previewInvoiceNumber.textContent = restoredInvoiceNumber;
+
+  document.getElementById("invoice-status").value =
+    invoiceData.invoice.status || "Unpaid";
 
   document.getElementById("business-name").value =
     invoiceData.business.name || "";
