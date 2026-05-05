@@ -139,17 +139,30 @@
 
           <div class="text-gray-950 text-lg mt-3">Invoice Details</div>
           <hr class="border-gray-200 border" />
-          <div class="flex items-center gap-2.5">
-            <label for="invoice-number" class="text-gray-400"
-              >Invoice Number
-            </label>
-            <input
-              type="text"
-              class="text-sm block py-1 px-2 w-full pointer-events-none"
-              id="invoice-number"
-              readonly
-              data-invoice-field
-            />
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <label for="invoice-number" class="text-gray-400"
+                >Invoice Number
+              </label>
+              <input
+                type="text"
+                class="text-sm block py-1 px-2 w-full pointer-events-none"
+                id="invoice-number"
+                readonly
+                data-invoice-field
+              />
+            </div>
+            <div class="flex items-center gap-2.5">
+              <label for="status" class="text-gray-400">Status</label>
+              <select
+                id="invoice-status"
+                class="border border-gray-300 focus:border-sky-600 focus:border-2 px-2 py-1 text-sm w-full rounded"
+                data-invoice-field
+              >
+                <option value="Unpaid">Unpaid</option>
+                <option value="Paid">Paid</option>
+              </select>
+            </div>
           </div>
 
           <div class="flex items-center gap-2.5">
@@ -357,9 +370,11 @@
               >
                 Invoice number
               </p>
+              <div class="text-gray-600 text-sm" id="preview-status"></div>
               <p class="text-gray-600 text-sm" id="preview-invoice-date">
                 Invoice date
               </p>
+              
             </div>
           </div>
         </div>
