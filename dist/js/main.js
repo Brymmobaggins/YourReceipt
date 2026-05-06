@@ -1,9 +1,12 @@
 /** @format */
+// Ensure html2pdf is available (if using modules, uncomment the next line):
+// import html2pdf from "html2pdf.js";
 const rowBody = document.querySelector("#row-body");
 const addItemBtn = document.getElementById("add-item-btn");
 const resetBtn = document.getElementById("reset-btn");
 const prinBtn = document.getElementById("print-btn");
 const saveBtn = document.getElementById("save-btn");
+const previewLogo = document.getElementById("preview-logo");
 
 function init() {
   syncInputToPreview("business-name", "preview-business-name", "Business Name");
@@ -38,11 +41,7 @@ function init() {
     "preview-phone-number",
     "Business Phone Number",
   );
-  syncInputToPreview(
-    "customer-name",
-    "preview-customer-name",
-    "Customer Address",
-  );
+  syncInputToPreview("customer-name", "preview-customer-name", "Customer Name");
   syncInputToPreview(
     "customer-address",
     "preview-customer-address",
@@ -54,6 +53,10 @@ function init() {
     "Invoice Number",
   );
   syncInputToPreview("invoice-date", "preview-invoice-date", "Invoice Date");
+
+  syncInputToPreview("invoice-status", "preview-status", "Unpaid");
+
+  handleLogoUpload();
 }
 
 init();
@@ -68,7 +71,11 @@ function syncInputToPreview(inputId, previewId, fallback) {
 }
 
 function formatMoney(value) {
-  return value.toFixed(2);
+  return new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+    minimumFractionDigits: 2,
+  }).format(value);
 }
 
 function createItemRow() {
@@ -119,10 +126,11 @@ function addNewRow() {
   const newRow = createItemRow();
   rowBody.appendChild(newRow);
   syncItemsToPreview();
-  saveInvoiceData();
+  // saveInvoiceData();
 }
 
 addItemBtn.addEventListener("click", addNewRow);
+
 function syncItemsToPreview() {
   const previewItemsBody = document.getElementById("preview-items-body");
   const previewSubtotal = document.getElementById("preview-subtotal");
@@ -130,11 +138,23 @@ function syncItemsToPreview() {
   const previewTotal = document.getElementById("preview-total");
   const previewDiscount = document.getElementById("preview-discount");
 
+  const status = document.getElementById("invoice-status").value;
+  const previewStatus = document.getElementById("preview-status");
+
+  if (status === "Paid") {
+    previewStatus.textContent = "Paid";
+    previewStatus.className = "text-green-600 font-semibold text-sm";
+  } else {
+    previewStatus.textContent = "Unpaid";
+    previewStatus.className = "text-red-600 font-semibold text-sm";
+  }
+
   let previewRowsHTML = "";
   let subTotal = 0;
+  let index = 1;
 
   const itemRows = document.querySelectorAll(".item-row");
-  itemRows.forEach((row) => {
+  itemRows.forEach((row, index) => {
     const desc = row.querySelector(".item-desc").value.trim();
     const qty = parseFloat(row.querySelector(".item-qty").value) || 0;
     const price = parseFloat(row.querySelector(".item-price").value) || 0;
@@ -148,11 +168,13 @@ function syncItemsToPreview() {
     subTotal += amount;
 
     previewRowsHTML += `
-      <tr class="p-1.5">
-            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${desc}</td>
-            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${qty}</td>
-            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${formatMoney(price)}</td>
-            <td class="text-gray-600 text-center p-1.5 border border-gray-400">${formatMoney(amount)}</td>
+      <tr class="p-2 sapce-y-1.5">
+
+            <td class="text-gray-600 text-center p-2 border border-gray-400">${(index += 1)}</td>
+            <td class="text-gray-600 text-center p-2 border border-gray-400">${desc}</td>
+            <td class="text-gray-600 text-center p-2 border border-gray-400">${qty}</td>
+            <td class="text-gray-600 text-center p-2 border border-gray-400">${formatMoney(price)}</td>
+            <td class="text-gray-600 text-center p-2 border border-gray-400">${formatMoney(amount)}</td>
       </tr>
     `;
   });
@@ -160,7 +182,7 @@ function syncItemsToPreview() {
   if (previewRowsHTML.trim() === "") {
     previewItemsBody.innerHTML = `
       <tr>
-        <td class="text-center text-gray-600 p-1.5" colspan="4">No Items</td>
+        <td class="text-center text-gray-600 p-2" colspan="5">No Items</td>
       </tr>`;
   } else {
     previewItemsBody.innerHTML = previewRowsHTML;
@@ -174,12 +196,12 @@ function syncItemsToPreview() {
   const discountAmount = subTotal * (discountRate / 100);
   const total = subTotal + taxAmount - discountAmount;
 
-  previewSubtotal.textContent = `Subtotal: ${formatMoney(subTotal)}`;
-  previewTax.textContent = `Tax (${taxRate}%): ${formatMoney(taxAmount)}`;
-  previewDiscount.textContent = `Discount (${discountRate}%): ${formatMoney(discountAmount)}`;
-  previewTotal.textContent = `Total: ${formatMoney(total)}`;
+  previewSubtotal.textContent = `${formatMoney(subTotal)}`;
+  previewTax.textContent = ` ${formatMoney(taxAmount)}`;
+  previewDiscount.textContent = `${formatMoney(discountAmount)}`;
+  previewTotal.textContent = `${formatMoney(total)}`;
 
-  saveInvoiceData();
+  // saveInvoiceData();
 }
 
 document.addEventListener("input", function (e) {
@@ -201,7 +223,7 @@ function handleDeleteRow(btn) {
   if (row) {
     row.remove();
     syncItemsToPreview();
-    saveInvoiceData();
+    // saveInvoiceData();
   }
 }
 
@@ -209,7 +231,37 @@ prinBtn.addEventListener("click", function () {
   window.print();
 });
 
+function handleLogoUpload() {
+  const businessLogo = document.getElementById("business-logo");
+
+  businessLogo.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function () {
+      const base64image = reader.result;
+
+      previewLogo.src = base64image;
+      previewLogo.classList.remove("hidden");
+
+      // save into state
+      previewLogo.dataset.logo = base64image;
+
+      // trigger
+      saveInvoiceData();
+    });
+    reader.readAsDataURL(file);
+  });
+}
+
 function getInvoiceData() {
+  const businessLogo =
+    previewLogo && !previewLogo.classList.contains("hidden")
+      ? previewLogo.src
+      : "";
   const businessName = document.getElementById("business-name").value;
   const businessAddress = document.getElementById("business-address").value;
   const businessEmail = document.getElementById("business-email").value;
@@ -220,7 +272,7 @@ function getInvoiceData() {
 
   const invoiceNumber = document.getElementById("invoice-number").value;
   const invoiceDate = document.getElementById("invoice-date").value;
-
+  const invoiceStatus = document.getElementById("invoice-status").value;
   const tax = parseFloat(document.getElementById("tax").value) || 0;
   const discount = parseFloat(document.getElementById("discount").value) || 0;
 
@@ -240,6 +292,7 @@ function getInvoiceData() {
 
   const invoiceData = {
     business: {
+      logo: businessLogo,
       name: businessName,
       address: businessAddress,
       email: businessEmail,
@@ -252,6 +305,7 @@ function getInvoiceData() {
     invoice: {
       number: invoiceNumber,
       date: invoiceDate,
+      status: invoiceStatus,
     },
     charges: {
       tax,
@@ -262,15 +316,43 @@ function getInvoiceData() {
   return invoiceData;
 }
 
+// load invoice data from local storage when it is refesshed
 function loadInvoiceData() {
   const savedData = localStorage.getItem("invoiceData");
+  const previewInvoiceNumber = document.getElementById(
+    "preview-invoice-number",
+  );
+  const invoiceNumberInput = document.getElementById("invoice-number");
+
   if (!savedData) {
+    const newInvoiceNumber = generateInvoiceNumber();
+    invoiceNumberInput.value = newInvoiceNumber;
+    previewInvoiceNumber.textContent = newInvoiceNumber;
+
+    // restore in invoice date
+    const invoiceDate = document.getElementById("invoice-date");
+    invoiceDate.value = getTodayDate();
+
+    //  restore invoice status
+    document.getElementById("invoice-status").value || "Unpaid";
     return;
   }
 
   const invoiceData = JSON.parse(savedData);
 
-  // Restore business info
+  if (invoiceData.business.logo) {
+    previewLogo.src = invoiceData.business.logo;
+    previewLogo.classList.remove("hidden");
+  }
+
+  const restoredInvoiceNumber =
+    invoiceData.invoice.number || generateInvoiceNumber();
+  invoiceNumberInput.value = restoredInvoiceNumber;
+  previewInvoiceNumber.textContent = restoredInvoiceNumber;
+
+  document.getElementById("invoice-status").value =
+    invoiceData.invoice.status || "Unpaid";
+
   document.getElementById("business-name").value =
     invoiceData.business.name || "";
   document.getElementById("business-address").value =
@@ -280,24 +362,18 @@ function loadInvoiceData() {
   document.getElementById("business-phone").value =
     invoiceData.business.phone || "";
 
-  // Restore customer info
   document.getElementById("customer-name").value =
     invoiceData.customer.name || "";
   document.getElementById("customer-address").value =
     invoiceData.customer.address || "";
 
-  // Restore invoice info
-  document.getElementById("invoice-number").value =
-    invoiceData.invoice.number || "";
   document.getElementById("invoice-date").value =
-    invoiceData.invoice.date || "";
+    invoiceData.invoice.date || getTodayDate();
 
-  // Restore charges
   document.getElementById("tax").value = invoiceData.charges.tax || "";
   document.getElementById("discount").value =
     invoiceData.charges.discount || "";
 
-  // Clear existing item rows
   rowBody.innerHTML = "";
 
   //  restore items
@@ -313,43 +389,120 @@ function loadInvoiceData() {
     addNewRow();
   }
   syncItemsToPreview();
+
+  document.querySelectorAll("[data-invoice-field]").forEach((input) => {
+    input.dispatchEvent(new Event("input"));
+  });
 }
 loadInvoiceData();
 
-// this function job is to call the `getInvoiceData()` converts the result to JSON, and store it in local storage. why did i convert plain object to string? because local storage can not plain object directly, it only stores strings.
+// localStorage only stores strings, so the invoice object is saved as JSON.
 function saveInvoiceData() {
   const invoiceData = getInvoiceData();
   localStorage.setItem("invoiceData", JSON.stringify(invoiceData));
 }
-saveBtn.addEventListener("click", saveInvoiceData);
 
+// find all inputs with `data-invoice-field` attribute and trigger their `input` events.
 document.querySelectorAll("[data-invoice-field]").forEach((input) => {
   input.dispatchEvent(new Event("input"));
 });
 
 // fuction to reset
 function resetInvoice() {
-  // clear all inputs
+  const logoUpload = document.getElementById("business-logo");
+  previewLogo.src = "";
+  previewLogo.classList.add("hidden");
+  logoUpload.value = "";
+
   document.querySelectorAll("input").forEach((input) => {
     input.value = "";
-    
   });
-  
+
   // clear items row
   rowBody.innerHTML = "";
-  
-  // add fresh row
-  addNewRow()
+  document.getElementById("invoice-date").value = getTodayDate();
 
-  // removed saved data
+  addNewRow();
   localStorage.removeItem("invoiceData");
 
   // reset preveiew text
   document.querySelectorAll("[data-invoice-field]").forEach((input) => {
     input.dispatchEvent(new Event("input"));
-  })
+  });
 
   // reset total and preview table
-  syncItemsToPreview()
+  syncItemsToPreview();
 }
 resetBtn.addEventListener("click", resetInvoice);
+
+function generateInvoiceNumber() {
+  let counter = localStorage.getItem("invoiceCounter");
+
+  if (!counter) {
+    counter = 1;
+  } else {
+    counter = parseInt(counter) + 1;
+  }
+  localStorage.setItem("invoiceCounter", counter);
+
+  return `INVOICE NO-${String(counter).padStart(4, "0")}`;
+}
+
+function getTodayDate() {
+  const today = new Date();
+
+  return today.toISOString().split("T")[0];
+}
+
+function generatePdfFilename() {
+  const invoiceNumber =
+    document.getElementById("invoice-number").value || "invoice";
+  const invoiceDate =
+    document.getElementById("invoice-date").value || getTodayDate();
+  const safeInvoiceNumber = invoiceNumber.replace(/[^a-zA-Z0-9-_]/g, "_");
+
+  return `${safeInvoiceNumber}_${invoiceDate}.pdf`;
+}
+
+function getPdfOptions() {
+  return {
+    margin: 10,
+    filename: generatePdfFilename(),
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: {
+      unit: "mm",
+      format: "a4",
+      orientation: "portrait",
+    },
+  };
+}
+
+function exportInvoiceToPDF() {
+  const invoicePreview = document.getElementById("invoice-preview");
+
+  // add PDF-safe styling
+  invoicePreview.classList.add("pdf-safe");
+  const options = getPdfOptions();
+
+  html2pdf()
+    .set(options)
+    .from(invoicePreview)
+    .save()
+    .then(() => {
+      // remove the styling after export
+      invoicePreview.classList.remove("pdf-safe");
+    })
+    .catch((error) => {
+      invoicePreview.classList.remove("pdf-safe");
+      console.error("PDF export failed:", error);
+      alert("PDF export failed. Check console.");
+    });
+}
+
+function handleSaveInvoice() {
+  syncItemsToPreview();
+  exportInvoiceToPDF();
+}
+
+saveBtn.addEventListener("click", handleSaveInvoice);

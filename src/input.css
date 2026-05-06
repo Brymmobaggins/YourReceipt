@@ -2,12 +2,17 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Fruktur:ital@0;1&display=swap");
+
 @import "tailwindcss";
 
 @theme {
   --font-Roboto: "Roboto", sans-serif;
+  --font-fruktur: "Fruktur", system-ui;
 }
-
+/* form input[type="file"]{
+  width: 3.5rem;
+} */
 form input {
   flex: 1;
   margin-bottom: 10px;
@@ -16,23 +21,31 @@ form input {
 }
 
 form label {
-  width: 100px;
+  width: 80px;
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+#invoice-preview {
+  background: #ffffff;
+  /* color: #111827; */
+}
+
+
+.pdf-safe {
+  background: #ffffff;
+  color: #111827;
+}
+
+.pdf-safe table,
+.pdf-safe th,
+.pdf-safe td {
+  border-color: #d1d5db !important;
+}
 
 @media print {
-  /* #header,
-  #form-container,
-  #footer {
-    display: none !important;
-  } */
-
- 
-
   main {
     display: block !important;
     max-width: 100% !important;

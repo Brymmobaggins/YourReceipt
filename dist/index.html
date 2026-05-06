@@ -6,44 +6,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>YourReceipt | Home</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="/assests/images/receipt-logo.png"
+      href="./assests/images/receipt-logo.png"
     />
-    <script src="/js/main.js" defer></script>
+    <!-- htmltopdf cdn -->
+    <script
+      defer
+      src="https://unpkg.com/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"
+    ></script>
+    <script defer src="./js/main.js"></script>
   </head>
   <body class="bg-gray-white min-h-screen print:bg-white">
-    <header class="p-2.5 border-b border-gray-300 mb-3 print:hidden">
-      <div class="flex items-start justify-between mb-6">
+    <header
+      class="mx-auto max-w-220 p-1.5 border-b border-gray-300 bg-white mb-3 sticky top-0 print:hidden"
+    >
+      <div class="md:flex items-start justify-between">
         <div>
-          <h1 class="text-2xl font-semibold">Your<b>Receipt</b></h1>
-          <p class="text-xs text-gray-950">
+          <h1 class="text-2xl font-semibold text-blue-600 font-fruktur">
+            Your<b>Receipt</b>
+          </h1>
+          <p class="text-xs tracking-tighter text-gray-950">
             Simple receipts. Professional results.
           </p>
         </div>
-        <div class="flex gap-3">
-          <button
-            type="button" id="save-btn"
-            class="text-sm px-3 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-100
-             transition hover:cursor-pointer"
-          >
-            Save
-          </button>
-
+        <div class="gap-4 mt-2 sm:mt-0 sm:flex">
           <button
             type="button"
             id="print-btn"
-            class="text-sm px-3 py-2 border border-blue-200 bg-blue-50 text-blue-700 rounded hover:bg-blue-100 transition hover:cursor-pointer"
+            class="text-sm font-semibold tracking-tight px-1.5 py-1 border border-blue-200 bg-blue-50 text-blue-700 rounded hover:bg-blue-100 transition hover:cursor-pointer"
           >
             Print
+          </button>
+          <button
+            type="download"
+            id="save-btn"
+            class="text-sm font-semibold tracking-tight px-1.5 py-1 border border-gray-300 text-gray-700 rounded transition hover:bg-gray-100 hover:cursor-pointer"
+          >
+            Download as PDF
           </button>
         </div>
       </div>
     </header>
-    <main class="flex gap-5 mx-auto max-w-220">
+    <main class="sm:flex gap-5 mx-auto max-w-220">
       <div class="w-full border border-gray-300 rounded flex-1 print:hidden">
         <form class="p-2 shadow-md" id="form">
           <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
@@ -52,23 +60,33 @@
           <div class="text-gray-950 text-lg hr">Business Info</div>
           <hr class="border-gray-200 border" />
           <!-- business name -->
+          <div class="flex item-center mt-4">
+            <label for="" class="text-gray-400 ext-sm">Business logo</label>
+            <input
+              type="file"
+              id="business-logo"
+              accept="image/*"
+              class="block w-full text-sm text-gray-500 file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-500 file:text-white hover:file:bg-gray-600 hover:cursor-pointer"
+              data-invoice-field
+            />
+          </div>
           <div class="flex items-center gap-2">
             <label for="business-name" class="text-gray-400"
               >Business Name
             </label>
             <input
               type="text"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="business-name"
               data-invoice-field
             />
           </div>
           <!-- Address -->
-          <div class="flex items-center gap-2.5">
+          <div class="flex items-center gap-2">
             <label for="address" class="text-gray-400">Address</label>
             <input
               type="text"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="business-address"
               data-invoice-field
             />
@@ -78,7 +96,7 @@
             <label for="email" class="text-gray-400">Email</label>
             <input
               type="text"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="business-email"
               data-invoice-field
             />
@@ -88,7 +106,7 @@
             <label for="text" class="text-gray-400">Phone</label>
             <input
               type="number"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="business-phone"
               data-invoice-field
             />
@@ -102,7 +120,7 @@
             </label>
             <input
               type="text"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="customer-name"
               data-invoice-field
             />
@@ -112,7 +130,7 @@
             <label for="address" class="text-gray-400">Customer Address</label>
             <input
               type="text"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="customer-address"
               data-invoice-field
             />
@@ -121,23 +139,46 @@
 
           <div class="text-gray-950 text-lg mt-3">Invoice Details</div>
           <hr class="border-gray-200 border" />
-          <div class="flex items-center gap-2.5">
-            <label for="business-name" class="text-gray-400"
-              >Invoice Number
-            </label>
-            <input
-              type="number"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
-              id="invoice-number"
-              data-invoice-field
-            />
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <label for="invoice-number" class="text-gray-400"
+                >Invoice Number
+              </label>
+              <input
+                type="text"
+                class="text-sm block py-1 px-2 w-full pointer-events-none"
+                id="invoice-number"
+                readonly
+                data-invoice-field
+              />
+            </div>
+            <div class="flex items-center gap-2.5">
+              <label for="status" class="text-gray-400">Status</label>
+              <select
+                id="invoice-status"
+                class="border border-gray-300 focus:border-sky-600 focus:border-2 px-2 py-1 text-sm w-full rounded"
+                data-invoice-field
+              >
+                <option value="Unpaid">Unpaid</option>
+                <option value="Paid">Paid</option>
+              </select>
+            </div>
           </div>
 
           <div class="flex items-center gap-2.5">
-            <label for="address" class="text-gray-400">Invoice Date</label>
+            <label for="invoice-date" class="text-gray-400">Invoice Date</label>
             <input
               type="date"
-              class="border border-gray-400 focus:border-gray-500 focus:border-2 text-sm block py-1 px-2 w-full"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
+              id="invoice-date"
+              data-invoice-field
+            />
+          </div>
+          <div class="flex items-center gap-2.5">
+            <label for="invoice-date" class="text-gray-400">Due Date</label>
+            <input
+              type="date"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 text-sm block py-1 px-2 w-full"
               id="invoice-date"
               data-invoice-field
             />
@@ -171,14 +212,14 @@
               <tr class="item-row">
                 <td class="border border-gray-400 p-1.5">
                   <input
-                    class="item-desc border border-gray-400 w-full px-2 py-1 break-word"
+                    class="item-desc border border-gray-300 focus:border-sky-600 focus:border-2 w-full px-2 py-1 break-word"
                     type="text"
                     data-invoice-field
                   />
                 </td>
                 <td class="border border-gray-400 p-1.5">
                   <input
-                    class="item-qty border border-gray-400 w-full px-2 py-1"
+                    class="item-qty border border-gray-300 focus:border-sky-600 focus:border-2 w-full px-2 py-1"
                     type="number"
                     min="1"
                     data-invoice-field
@@ -186,7 +227,7 @@
                 </td>
                 <td class="border border-gray-400 p-1.5">
                   <input
-                    class="item-price border border-gray-400 w-full px-2 py-1"
+                    class="item-price border border-gray-300 focus:border-sky-600 focus:border-2 w-full px-2 py-1"
                     type="text"
                     data-invoice-field
                   />
@@ -198,7 +239,7 @@
                 <td class="border border-gray-400 p-1.5 text-center">
                   <button
                     type="button"
-                    class="remove-btn border text-center border-red-200 text-red-700 w-full rounded px-1 py-0.5 text-sm hover:bg-red-100 hover:cursor-pointer"
+                    class="remove-btn border text-center border-red-200 text-red-700 w-full rounded px-1 py-0.5 text-sm font-semibold hover:bg-red-100 hover:cursor-pointer"
                   >
                     X
                   </button>
@@ -209,7 +250,7 @@
           <div class="mt-2">
             <button
               type="button"
-              class="border border-blue-200 mt-1 px-1.5 py-1 text-sm text-blue-700 rounded hover:cursor-pointer hover:bg-blue-100 transition"
+              class="border border-blue-200 mt-1 px-1.5 py-1 font-semibold text-sm text-blue-700 rounded hover:cursor-pointer hover:bg-blue-100 transition"
               id="add-item-btn"
             >
               + Add Item
@@ -224,7 +265,7 @@
             <input
               type="number"
               id="tax"
-              class="border border-gray-400 focus:border-2 rounded px-2 py-1 w-full text-sm"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 rounded px-2 py-1 w-full text-sm"
               data-invoice-field
             />
           </div>
@@ -233,88 +274,118 @@
             <input
               type="number"
               id="discount"
-              class="border border-gray-400 focus:border-2 rounded px-2 py-1 w-full text-sm"
+              class="border border-gray-300 focus:border-sky-600 focus:border-2 rounded px-2 py-1 w-full text-sm"
               data-invoice-field
             />
           </div>
 
-          <div class="action">
+          <div class="">
             <button
-              type="button" id="reset-btn"
-              class="border border-gray-300 text-gray-700 px-3 rounded text-sm py-2 hover:bg-gray-100 hover:cursor-pointer transition"
+              type="button"
+              id="reset-btn"
+              class="border border-gray-400 text-gray-700 px-1.5 rounded text-sm font-semibold py-1 hover:bg-gray-100 hover:cursor-pointer transition tracking-tight"
               id="reset"
             >
               Reset
-            </button>
-            <button
-              type="button"
-              class="bg-blue-600 text-white text-sm px-3 py-2 rounded hover:bg-blue-700 hover:cursor-pointer transition"
-            >
-              Generate Invoice
             </button>
           </div>
         </form>
       </div>
       <!-- live Preview -->
       <div
-        class="flex-1 border border-gray-300 p-2 rounded shadow-md"
+        class="mt-4 flex-1 border border-gray-300 p-2 rounded shadow-md"
         id="invoice-preview"
       >
-        <div class="text-xl font-bold text-gray-950 p-1 mb-3 font-mono">
-          INVOICE PREVIEW
+        <div
+          class="text-2xl text-center font-bold text-gray-950 p-1 mb-3 font-mono"
+        >
+          INVOICE
         </div>
         <div class="mt-2">
-          <p class="text-gray-600 text-sm h-8 p-1.5" id="preview-business-name">
+          <div class="w-32 h-16 flex item-center mb-2">
+            <img
+              id="preview-logo"
+              class="hidden object-fit h-full w-full"
+              alt="preview-logo"
+            />
+          </div>
+          <p
+            class="text-gray-900 text-base font-bold"
+            id="preview-business-name"
+          >
             Business Name
           </p>
 
           <p
-            class="text-gray-600 text-sm h-8 p-1.5"
+            class="text-gray-600 text-sm leading-6 tracking-tight"
             id="preview-business-address"
           >
             Business Address
           </p>
           <p
-            class="text-gray-600 text-sm h-8 p-1.5"
+            class="text-gray-600 text-sm leading-6 tracking-tight"
             id="preview-business-email"
           >
             Business Email
           </p>
-          <p class="text-gray-600 text-sm h-8 p-1.5" id="preview-phone-number">
+          <p
+            class="text-gray-600 text-sm leading-6 tracking-tight"
+            id="preview-phone-number"
+          >
             Business Phone number
           </p>
         </div>
+        <hr />
 
         <!-- customer information preview -->
         <div>
-          <div class="text-lg text-gray-950">Customer Info</div>
-          <p class="text-gray-600 text-sm h-8 p-1.5" id="preview-customer-name">
-            Customer name
-          </p>
-          <p
-            class="text-gray-600 text-sm h-8 p-1.5"
-            id="preview-customer-address"
-          >
-            Customer address
-          </p>
+          <div class="sm:grid grid-cols-2 gap-4">
+            <div class="">
+              <div class="text-base font-bold text-gray-900">Bill To:</div>
+              <p
+                class="text-gray-600 text-sm leading-6"
+                id="preview-customer-name"
+              >
+                Customer Name
+              </p>
+              <p
+                class="text-gray-600 text-sm leading-6"
+                id="preview-customer-address"
+              >
+                Customer Address
+              </p>
+              <p
+                class="text-gray-600 text-sm leading-6"
+                id="preview-customer-address"
+              >
+                Customer's Phone no
+              </p>
+            </div>
+
+            <div class="">
+              <div class="text-base font-bold text-gray-900">Invoice Info:</div>
+              <p
+                class="text-gray-600 text-sm font-medium"
+                id="preview-invoice-number"
+              >
+                Invoice number
+              </p>
+              <div class="text-gray-600 text-sm" id="preview-status"></div>
+              <p class="text-gray-600 text-sm" id="preview-invoice-date">
+                Invoice date
+              </p>
+              
+            </div>
+          </div>
         </div>
-        <!-- customer invoice -->
-        <div>
-          <div class="text-lg text-gray-950">Invoice Details</div>
-          <p
-            class="text-gray-600 text-sm h-8 p-1.5"
-            id="preview-invoice-number"
-          >
-            Invoice number
-          </p>
-          <p class="text-gray-600 text-sm h-8 p-1.5" id="preview-invoice-date">
-            Invoice date
-          </p>
-        </div>
+
         <!-- preview table -->
-        <table class="w-full border border-gray-300 rounded">
+        <table class="w-full border border-gray-300 rounded mt-4">
           <thead class="rounded">
-            <tr class="text-sm font-medium text-left bg-gray-900 rounded">
+            <tr
+              class="text-sm font-medium text-left rounded bg-black text-white"
+            >
+              <th class="font-light text-white text-center">S/N</th>
               <th class="font-light text-gray-200 text-center">Description</th>
               <th class="font-light text-center text-gray-200">Qty</th>
               <th class="font-light text-center text-gray-200">Unit Price</th>
@@ -325,17 +396,34 @@
           <tbody id="preview-items-body"></tbody>
         </table>
         <!-- subtotal -->
-        <div class="border border-gray-300 p-1.5 text-right">
-          <div class="text-gray-800" id="preview-subtotal"></div>
-          <div class="text-gray-800" id="preview-tax"></div>
-          <div class="text-gray-800" id="preview-discount"></div>
-          <div class="text-gray-800" id="preview-total"></div>
+        <div class="border border-gray-300 p-2 text-right space-y-1.5">
+          <div class="flex justify-between items-center">
+            <span class="text-gray-400">Subtotal:</span>
+            <div class="text-gray-900" id="preview-subtotal"></div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-400"
+              >Tax(<span id="tax-rate">0</span>%):</span
+            >
+            <div class="text-gray-900" id="preview-tax"></div>
+          </div>
+
+          <div class="flex justify-between items-center">
+            <span class="text-gray-400"
+              >Discount(<span id="discount-rate">0</span>%):</span
+            >
+            <div class="text-gray-900" id="preview-discount"></div>
+          </div>
+          <div class="flex justify-between items-center border-t mt-2 pt-2">
+            <span class="text-gray-600 font-semibold">Total:</span>
+            <div class="text-gray-900 font-bold" id="preview-total"></div>
+          </div>
         </div>
       </div>
     </main>
 
     <footer class="text-right p-2 mt-4 print:hidden">
-      <div>Generate invoice with yourreceipt</div>
+      <div class="text-xs sm:text-base">Generate invoice with YourReceipt</div>
     </footer>
   </body>
 </html>
