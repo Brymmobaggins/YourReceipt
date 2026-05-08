@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch:css": "npx @tailwindcss/cli -i ./src/input.css -o ./dist/style.css --watch",
     "server": "live-server --port=5501 --no-browser --entry-file=index.html",
-    "dev": "concurrently \"npm run watch:css\" \"npm run server\""
+    "dev": "concurrently \"npm run watch:css\" \"npm run server\"",
+    "build": "npx @tailwindcss/cli -i ./src/input.css -o ./dist/style.css"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.2.1",
