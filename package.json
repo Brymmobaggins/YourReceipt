@@ -8,10 +8,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./dist/style.css --watch"
+    "watch:css": "npx @tailwindcss/cli -i ./src/input.css -o ./dist/style.css --watch",
+    "server": "live-server --port=5501 --no-browser --entry-file=index.html",
+    "dev": "concurrently \"npm run watch:css\" \"npm run server\""
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.2.1",
     "tailwindcss": "^4.2.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "live-server": "^1.2.2"
   }
 }
