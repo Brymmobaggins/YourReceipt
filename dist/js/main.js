@@ -7,6 +7,7 @@ const resetBtn = document.getElementById("reset-btn");
 const prinBtn = document.getElementById("print-btn");
 const saveBtn = document.getElementById("save-btn");
 const previewLogo = document.getElementById("preview-logo");
+const previewStatus = document.getElementById("preview-status");
 
 function init() {
   syncInputToPreview("business-name", "preview-business-name", "Business Name");
@@ -139,7 +140,6 @@ function syncItemsToPreview() {
   const previewDiscount = document.getElementById("preview-discount");
 
   const status = document.getElementById("invoice-status").value;
-  const previewStatus = document.getElementById("preview-status");
 
   if (status === "Paid") {
     previewStatus.textContent = "Paid";
@@ -429,6 +429,12 @@ function resetInvoice() {
   document.querySelectorAll("[data-invoice-field]").forEach((input) => {
     input.dispatchEvent(new Event("input"));
   });
+
+  const statusInput = document.getElementById("invoice-status");
+  statusInput.value = "Unpaid";
+  previewStatus.classList.remove("status-paid", "status-unpaid");
+  previewStatus.textContent = "Unpaid";
+  previewStatus.classList.add("status-unpaid");
 
   // reset total and preview table
   syncItemsToPreview();
