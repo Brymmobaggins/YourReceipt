@@ -139,31 +139,47 @@
 
           <div class="text-gray-950 text-lg mt-3">Invoice Details</div>
           <hr class="border-gray-200 border" />
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <label for="invoice-number" class="text-gray-400"
-                >Invoice Number
-              </label>
-              <input
-                type="text"
-                class="text-sm block py-1 px-2 w-full pointer-events-none"
-                id="invoice-number"
-                readonly
-                data-invoice-field
-              />
-            </div>
-            <div class="flex items-center gap-2.5">
-              <label for="status" class="text-gray-400">Status</label>
+          <!-- <div class="flex items-center justify-between"> -->
+          <div class="flex items-center">
+            <label for="invoice-number" class="text-gray-400"
+              >Invoice Number
+            </label>
+            <input
+              type="text"
+              class="text-sm block py-1 px-2 w-full pointer-events-none"
+              id="invoice-number"
+              readonly
+              data-invoice-field
+            />
+          </div>
+          <div
+            class="flex items-center justify-between gap-2.5 w-full border border-red-300"
+          >
+            <div id="status-wrapper" class="flex items-center gap-2 w-full">
+              <label for="invoice-status" class="text-gray-400">Status</label>
               <select
                 id="invoice-status"
-                class="border border-gray-300 focus:border-sky-600 focus:border-2 px-2 py-1 text-sm w-full rounded"
+                class="border border-gray-300 focus:border-sky-600 focus:border-2 px-2 py-1 text-xs md:text-sm rounded"
                 data-invoice-field
               >
-                <option value="Unpaid">Unpaid</option>
-                <option value="Paid">Paid</option>
+                <option value="unpaid">UNPAID</option>
+                <option value="paid">PAID</option>
               </select>
             </div>
+
+            <div
+              id="paid-date-wrapper"
+              class="hidden items-center gap-2 w-full"
+            >
+              <label for="paid-date" class="text-gray-400">Paid Date</label>
+              <input
+                type="date"
+                id="paid-date"
+                class="border border-gray-300 focus:border-sky-600 focus:border-2 px-2 py-1 text-sm rounded"
+              />
+            </div>
           </div>
+          <!-- </div> -->
 
           <div class="flex items-center gap-2.5">
             <label for="invoice-date" class="text-gray-400">Invoice Date</label>
@@ -362,7 +378,7 @@
               </p>
             </div>
 
-            <div class="">
+            <div>
               <div class="text-base font-bold text-gray-900">Invoice Info:</div>
               <p
                 class="text-gray-600 text-sm font-medium"
@@ -370,11 +386,15 @@
               >
                 Invoice number
               </p>
-              <div class="text-gray-600 text-sm" id="preview-status"></div>
-              <p class="text-gray-600 text-sm" id="preview-invoice-date">
-                Invoice date
-              </p>
-              
+              <div class="flex items-center gap-1">
+                <span class="text-gray-600 text-sm">Invoice status: </span>
+                <div class="text-gray-600 text-sm" id="preview-status"></div>
+              </div>
+              <div class="text-gray-600 text-sm" id="preview-paid-date"></div>
+              <div class="flex items-center gap-1">
+                <span class="text-gray-600 text-sm">Invoice date: </span>
+                <div class="text-gray-600 text-sm" id="preview-invoice-date"></div>
+              </div>
             </div>
           </div>
         </div>
