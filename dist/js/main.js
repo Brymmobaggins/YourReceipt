@@ -57,6 +57,8 @@ function init() {
 
   syncInputToPreview("invoice-status", "preview-status", "Unpaid");
 
+  // synPaidDateUI();
+
   handleLogoUpload();
 }
 
@@ -141,11 +143,11 @@ function syncItemsToPreview() {
 
   const status = document.getElementById("invoice-status").value;
 
-  if (status === "Paid") {
-    previewStatus.textContent = "Paid";
+  if (status === "paid") {
+    previewStatus.textContent = "paid";
     previewStatus.className = "text-green-600 font-semibold text-sm";
   } else {
-    previewStatus.textContent = "Unpaid";
+    previewStatus.textContent = "unpaid";
     previewStatus.className = "text-red-600 font-semibold text-sm";
   }
 
@@ -206,6 +208,7 @@ function syncItemsToPreview() {
 
 document.addEventListener("input", function (e) {
   if (e.target.hasAttribute("data-invoice-field")) {
+    syncPaidDateUI();
     syncItemsToPreview();
     saveInvoiceData();
   }
@@ -273,9 +276,10 @@ function getInvoiceData() {
   const invoiceNumber = document.getElementById("invoice-number").value;
   const invoiceDate = document.getElementById("invoice-date").value;
   const invoiceStatus = document.getElementById("invoice-status").value;
+  const paidDate = document.getElementById("paid-date").value;
+
   const tax = parseFloat(document.getElementById("tax").value) || 0;
   const discount = parseFloat(document.getElementById("discount").value) || 0;
-
   const items = [];
   const itemsRows = document.querySelectorAll(".item-row");
 
@@ -306,6 +310,7 @@ function getInvoiceData() {
       number: invoiceNumber,
       date: invoiceDate,
       status: invoiceStatus,
+      paidDate: paidDate,
     },
     charges: {
       tax,
@@ -334,7 +339,7 @@ function loadInvoiceData() {
     invoiceDate.value = getTodayDate();
 
     //  restore invoice status
-    document.getElementById("invoice-status").value || "Unpaid";
+    document.getElementById("invoice-status").value || "unpaid";
     return;
   }
 
@@ -395,6 +400,7 @@ function loadInvoiceData() {
   });
 }
 loadInvoiceData();
+syncPaidDateUI();
 
 // localStorage only stores strings, so the invoice object is saved as JSON.
 function saveInvoiceData() {
@@ -431,10 +437,12 @@ function resetInvoice() {
   });
 
   const statusInput = document.getElementById("invoice-status");
-  statusInput.value = "Unpaid";
+  statusInput.value = "unpaid";
   previewStatus.classList.remove("status-paid", "status-unpaid");
-  previewStatus.textContent = "Unpaid";
+  previewStatus.textContent = "unpaid";
   previewStatus.classList.add("status-unpaid");
+
+  syncPaidDateUI();
 
   // reset total and preview table
   syncItemsToPreview();
@@ -451,13 +459,42 @@ function generateInvoiceNumber() {
   }
   localStorage.setItem("invoiceCounter", counter);
 
-  return `INVOICE NO-${String(counter).padStart(4, "0")}`;
+  return `Invoice no-${String(counter).padStart(4, "0")}`;
 }
+function syncPaidDateUI() {
+  const status = document.getElementById("invoice-status").value;
+  const paidDateWrapper = document.getElementById("paid-date-wrapper");
+  const paidDate = document.getElementById("paid-date");
+  const previewPaidDate = document.getElementById("preview-paid-date");
 
+  if (status === "paid") {
+    paidDateWrapper.classList.remove("hidden");
+    paidDateWrapper.classList.add("flex");
+    if (!paidDate.value) {
+      paidDate.value = getTodayDate();
+    }
+    previewPaidDate.classList.remove("hidden");
+    previewPaidDate.textContent = `Paid Date: ${formatDate(paidDate.value)}`;
+  } else {
+    paidDateWrapper.classList.remove("flex");
+    paidDateWrapper.classList.add("hidden");
+    paidDate.value = "";
+
+    previewPaidDate.classList.add("hidden");
+    previewPaidDate.textContent = "";
+  }
+}
 function getTodayDate() {
   const today = new Date();
 
   return today.toISOString().split("T")[0];
+}
+
+function formatDate(dateString) {
+  if (!dateString) return "";
+
+  const [year, month, day] = dateString.split("-");
+  return `${day}/${month}/${year}`;
 }
 
 function generatePdfFilename() {
@@ -512,3 +549,5 @@ function handleSaveInvoice() {
 }
 
 saveBtn.addEventListener("click", handleSaveInvoice);
+
+// resetInvoice()
