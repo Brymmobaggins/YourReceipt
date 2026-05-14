@@ -44,7 +44,12 @@ input[type="number"]::-webkit-inner-spin-button {
 .pdf-safe td {
   border-color: #d1d5db !important;
 }
-
+/* #paid-date-wrapper{
+  display: none;
+} */
+/* .hidden{
+  display:none
+} */
 @media print {
   main {
     display: block !important;
