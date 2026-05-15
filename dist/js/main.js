@@ -4,7 +4,7 @@
 const rowBody = document.querySelector("#row-body");
 const addItemBtn = document.getElementById("add-item-btn");
 const resetBtn = document.getElementById("reset-btn");
-const prinBtn = document.getElementById("print-btn");
+const printBtn = document.getElementById("print-btn");
 const saveBtn = document.getElementById("save-btn");
 const previewLogo = document.getElementById("preview-logo");
 const previewStatus = document.getElementById("preview-status");
@@ -53,7 +53,13 @@ function init() {
     "preview-invoice-number",
     "Invoice Number",
   );
-  syncInputToPreview("invoice-date", "preview-invoice-date", "Invoice Date");
+ 
+  
+  const invoiceDateInput = document.getElementById("invoice-date")
+  const previewInvoicDate = document.getElementById("preview-invoice-date")
+  invoiceDateInput.addEventListener("input", function(){
+    previewInvoicDate.textContent = formatDate(invoiceDateInput.value) || "invoice date"
+  })
 
   syncInputToPreview("invoice-status", "preview-status", "Unpaid");
 
@@ -172,7 +178,7 @@ function syncItemsToPreview() {
     previewRowsHTML += `
       <tr class="p-2 sapce-y-1.5">
 
-            <td class="text-gray-600 text-center p-2 border border-gray-400">${(index += 1)}</td>
+            <td class="text-gray-600 text-center p-2 border border-gray-400">${(index += 2)}</td>
             <td class="text-gray-600 text-center p-2 border border-gray-400">${desc}</td>
             <td class="text-gray-600 text-center p-2 border border-gray-400">${qty}</td>
             <td class="text-gray-600 text-center p-2 border border-gray-400">${formatMoney(price)}</td>
@@ -230,7 +236,7 @@ function handleDeleteRow(btn) {
   }
 }
 
-prinBtn.addEventListener("click", function () {
+printBtn.addEventListener("click", function () {
   window.print();
 });
 
