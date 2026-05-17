@@ -53,13 +53,24 @@ function init() {
     "preview-invoice-number",
     "Invoice Number",
   );
- 
-  
-  const invoiceDateInput = document.getElementById("invoice-date")
-  const previewInvoicDate = document.getElementById("preview-invoice-date")
-  invoiceDateInput.addEventListener("input", function(){
-    previewInvoicDate.textContent = formatDate(invoiceDateInput.value) || "invoice date"
-  })
+
+  const dueDateInput = document.getElementById("due-date");
+  const previewDueDate = document.getElementById("preview-due-date");
+  const invoiceDateInput = document.getElementById("invoice-date");
+  const previewInvoiceDate = document.getElementById("preview-invoice-date");
+
+  invoiceDateInput.addEventListener("input", function () {
+    if (!invoiceDateInput.value) {
+      previewInvoiceDate.textContent = "invoice date";
+      dueDateInput.value = "";
+      previewDueDate.textContent = "Due Date";
+      return;
+    }
+    previewInvoiceDate.textContent = formatDate(invoiceDateInput.value);
+
+    dueDateInput.value = addDaysToDate(invoiceDateInput.value, 7);
+    previewDueDate.textContent = formatDate(dueDateInput.value);
+  });
 
   syncInputToPreview("invoice-status", "preview-status", "Unpaid");
 
@@ -283,6 +294,7 @@ function getInvoiceData() {
   const invoiceDate = document.getElementById("invoice-date").value;
   const invoiceStatus = document.getElementById("invoice-status").value;
   const paidDate = document.getElementById("paid-date").value;
+  const dueDate = document.getElementById("due-date").value;
 
   const tax = parseFloat(document.getElementById("tax").value) || 0;
   const discount = parseFloat(document.getElementById("discount").value) || 0;
@@ -317,6 +329,7 @@ function getInvoiceData() {
       date: invoiceDate,
       status: invoiceStatus,
       paidDate: paidDate,
+      dueDate: dueDate,
     },
     charges: {
       tax,
@@ -381,6 +394,8 @@ function loadInvoiceData() {
   document.getElementById("invoice-date").value =
     invoiceData.invoice.date || getTodayDate();
 
+  document.getElementById("due-date").value = invoiceData.invoice.dueDate || "";
+
   document.getElementById("tax").value = invoiceData.charges.tax || "";
   document.getElementById("discount").value =
     invoiceData.charges.discount || "";
@@ -432,7 +447,16 @@ function resetInvoice() {
 
   // clear items row
   rowBody.innerHTML = "";
+
   document.getElementById("invoice-date").value = getTodayDate();
+ const dueDateInput = document.getElementById("due-date")
+ dueDateInput.value = addDaysToDate(getTodayDate(), 7);
+
+  document.getElementById("preview-invoice-date").textContent =
+    formatDate(getTodayDate());
+  document.getElementById("preview-due-date").textContent = formatDate(
+    dueDateInput.value,
+  );
 
   addNewRow();
   localStorage.removeItem("invoiceData");
@@ -494,6 +518,14 @@ function getTodayDate() {
   const today = new Date();
 
   return today.toISOString().split("T")[0];
+}
+
+function addDaysToDate(dateString, days) {
+  const date = new Date(dateString);
+
+  date.setDate(date.getDate() + days);
+
+  return date.toISOString().split("T")[0];
 }
 
 function formatDate(dateString) {
